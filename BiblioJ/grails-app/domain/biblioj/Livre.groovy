@@ -14,8 +14,9 @@ class Livre {
 	}
 	
     static constraints = {
-		'*'(nullable : false)
+		titre nullable : false, blank : false
+		nombreExemplaires nullable : false		 
+		nombreExemplairesDisponibles nullable : false
 		typeDocument nullable : true
-		titre blank : false
     }
 }

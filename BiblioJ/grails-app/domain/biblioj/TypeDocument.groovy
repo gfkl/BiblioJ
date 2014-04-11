@@ -8,3 +8,4 @@ class TypeDocument {
 		intitule nullable : false, blank : false
     }
 }
+

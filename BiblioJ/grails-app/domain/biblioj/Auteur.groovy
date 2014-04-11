@@ -5,9 +5,10 @@ class Auteur {
 	String	nom
 	String	prenom
 	
-	static hasmany = [auteurLivres : AuteurLivre]
-	
+	static hasMany = [auteurLivres : AuteurLivre]
+		
     static constraints = {
-		'*'(nullable : false, blank : false)
+		nom nullable : false, blank : false
+		prenom nullable : false, blank : false
     }
 }

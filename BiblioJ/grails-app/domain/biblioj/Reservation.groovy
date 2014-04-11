@@ -5,9 +5,10 @@ class Reservation {
 	String	code
 	Date	reservation
 	
-	static hashMany = [reservationLivres : ReservationLivre]
+	static hasMany = [reservationLivres : ReservationLivre]
 		
     static constraints = {
-		'*'(nullable : false)
+		code nullable : false
+		reservation nullable : false
     }
 }

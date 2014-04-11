@@ -11,6 +11,7 @@ class AuteurLivre {
 	}
 	
     static constraints = {
-		'*'(nullable : false)
+		auteur nullable : false
+		livre nullable : false
     }
 }
