@@ -1,30 +1,36 @@
 # .gitignore for Grails 1.2 and 1.3
 
 # web application files
-/web-app/WEB-INF/classes
+/BiblioJ/web-app/WEB-INF/classes
 
 # default HSQL database files for production mode
-/prodDb.*
+/BiblioJ/prodDb.*
 
 # general HSQL database files
 *Db.properties
 *Db.script
 
 # logs
-/stacktrace.log
-/test/reports
-/logs
+/BiblioJ/stacktrace.log
+/BiblioJ/test/reports
+/BiblioJ/logs
 
 # project release file
-/*.war
+/BiblioJ/*.war
 
 # plugin release files
-/*.zip
-/plugin.xml
+#/BiblioJ/*.zip
+#/BiblioJ/plugin.xml
 
 # older plugin install locations
-/plugins
-/web-app/plugins
+#/BiblioJ/plugins
+#/BiblioJ/web-app/plugins
 
 # "temporary" build files
-/target
+/BiblioJ/target
+
+# Workspace metadata
+.metadata
+
+# RemoteSystemTempFiles
+.project
