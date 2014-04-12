@@ -11,4 +11,8 @@ class Auteur {
 		nom nullable : false, blank : false
 		prenom nullable : false, blank : false
     }
+	
+	public String toString() {
+		nom +" - "+prenom
+	}
 }

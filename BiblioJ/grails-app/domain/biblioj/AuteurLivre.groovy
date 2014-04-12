@@ -14,4 +14,5 @@ class AuteurLivre {
 		auteur nullable : false
 		livre nullable : false
     }
+
 }

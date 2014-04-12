@@ -7,5 +7,9 @@ class TypeDocument {
     static constraints = {
 		intitule nullable : false, blank : false
     }
+
+	public String toString() {
+		intitule
+	}
 }
 

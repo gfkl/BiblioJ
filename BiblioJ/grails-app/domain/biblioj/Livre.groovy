@@ -19,4 +19,8 @@ class Livre {
 		nombreExemplairesDisponibles nullable : false
 		typeDocument nullable : true
     }
+	
+	public String toString() {
+		titre +" - "+typeDocument
+	}
 }
