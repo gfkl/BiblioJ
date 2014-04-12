@@ -14,5 +14,11 @@ class AuteurLivre {
 		auteur nullable : false
 		livre nullable : false
     }
+	
+	@Override
+	public String toString() {
+			return " [auteur=" + auteur + ", livre=" + livre+"]";
+
+	}
 
 }

@@ -24,14 +24,12 @@ class LivreController {
 		[livreInstance: new Livre(params)]
 	}
 
-	def recherche(){
-		//[recherche:Rechercher, typeDocument.id:null, typeDocument:[id:null],
-		//auteur:cxw, titre:dqs, action:recherche, controller:livre]
+	def listRecherche(){
 		def map = []
 		def livreInstance = Livre.list()
 		def findLivre = true
 		def findType = true
-		def findAuteur = true
+		def findAuteur = false
 		def typeLivre = null
 		def size = 0
 
@@ -41,7 +39,7 @@ class LivreController {
 		}catch(e) {
 			typeLivre = null
 		}
-		
+
 		livreInstance.each { curLivre ->
 			if(!params.titre.equals("")){
 				if(!(curLivre.titre ==~ ".*"+params.titre+".*"))
@@ -51,23 +49,26 @@ class LivreController {
 				if(!curLivre.typeDocument.equals(typeLivre))
 					findType = false
 			}
-			if(!params.auteur.equals("") && findLivre == false){
+			if(!params.auteur.equals("")){
+				curLivre.auteurLivres.each{  curLivreAuteur ->
+					if(curLivreAuteur.auteur.nom ==~ ".*"+params.auteur+".*"){
+						findAuteur = true
+					}
+				}
 
-			}
+			}else
+				findAuteur = true
+				
 			if(findLivre == true && findType == true && findAuteur == true){
 				map.add('livre':curLivre)
-				println curLivre
-				println curLivre.auteurLivres
 				size++
 			}
 			findLivre = true
 			findType = true
-			findAuteur = true
+			findAuteur = false
 		}
 
-		//redirect(controller:"Livre" ,action: "recherche")
-		//[livreInstanceList: map,  stationTransportInstanceTotal: size]
-
+		[livreInstanceList: map,  stationTransportInstanceTotal: size]
 	}
 
 	def save() {

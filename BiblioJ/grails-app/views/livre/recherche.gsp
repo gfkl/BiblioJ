@@ -27,7 +27,7 @@
 			</ul>
 			</g:hasErrors>
 			
-			<g:form action="recherche" >
+			<g:form action="listRecherche" >
 				<fieldset class="form">
 					<g:render template="formRecherche"/>
 				</fieldset>
