@@ -12,6 +12,7 @@ class LivreController {
 	}
 
 	def indexRecherche(){
+		//redirect(uri: "livre/recherche")
 		redirect(controller:"Livre" ,action: "recherche")
 	}
 
@@ -23,7 +24,6 @@ class LivreController {
 	def create() {
 		[livreInstance: new Livre(params)]
 	}
-
 	def listRecherche(){
 		def map = []
 		def livreInstance = Livre.list()
@@ -67,8 +67,10 @@ class LivreController {
 			findType = true
 			findAuteur = false
 		}
-
-		[livreInstanceList: map,  stationTransportInstanceTotal: size]
+		[livreInstanceList: map,  livreInstanceTotal: size]
+	}
+	def recherche(){
+		
 	}
 
 	def save() {
