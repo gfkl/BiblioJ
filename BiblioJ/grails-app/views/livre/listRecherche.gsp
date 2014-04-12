@@ -38,7 +38,7 @@
 				<g:each in="${livreInstanceList}" status="i" var="livreInstance">
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 					
-						<td>${(livreInstance.get('livre')).titre}</td>
+						<td><g:link action="show" id="${(livreInstance.get('livre')).id}">${(livreInstance.get('livre')).titre}</g:link></td>
 					
 						<td>${(livreInstance.get('livre')).nombreExemplaires}</td>
 					

@@ -24,6 +24,10 @@ class LivreController {
 	def create() {
 		[livreInstance: new Livre(params)]
 	}
+	
+	def recherche(){
+	}
+	
 	def listRecherche(){
 		def map = []
 		def livreInstance = Livre.list()
@@ -42,7 +46,7 @@ class LivreController {
 
 		livreInstance.each { curLivre ->
 			if(!params.titre.equals("")){
-				if(!(curLivre.titre ==~ ".*"+params.titre+".*"))
+				if(!(curLivre.titre.toLowerCase() ==~ ".*"+params.titre.toLowerCase()+".*"))
 					findLivre = false
 			}
 			if(typeLivre != null){
@@ -51,7 +55,7 @@ class LivreController {
 			}
 			if(!params.auteur.equals("")){
 				curLivre.auteurLivres.each{  curLivreAuteur ->
-					if(curLivreAuteur.auteur.nom ==~ ".*"+params.auteur+".*"){
+					if(curLivreAuteur.auteur.nom.toLowerCase() ==~ ".*"+params.auteur.toLowerCase()+".*"){
 						findAuteur = true
 					}
 				}
@@ -67,10 +71,8 @@ class LivreController {
 			findType = true
 			findAuteur = false
 		}
-		[livreInstanceList: map,  livreInstanceTotal: size]
-	}
-	def recherche(){
 		
+		[livreInstanceList: map,  livreInstanceTotal: size]
 	}
 
 	def save() {
