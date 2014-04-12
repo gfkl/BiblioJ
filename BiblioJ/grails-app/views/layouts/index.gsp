@@ -72,9 +72,9 @@
 			            </div>
 			            <div class="box-1 last">
 			            	
-    						<g:link controller="typeDocument" action="list">
+    						<g:link controller="livre" action="indexRecherche">
     							<strong class="number number-4">04.</strong>
-				                <span class="text-1">Type Document</span>
+				                <span class="text-1">RechercheLivre</span>
 				                <span class="link-1">Click Here</span>
 			                </g:link>
 			            </div>

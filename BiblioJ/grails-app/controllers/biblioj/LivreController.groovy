@@ -9,6 +9,10 @@ class LivreController {
     def index() {
         redirect(action: "list", params: params)
     }
+	
+	def indexRecherche(){
+		redirect(controller:"Livre" ,action: "recherche")
+	}
 
     def list(Integer max) {
         params.max = Math.min(max ?: 10, 100)
@@ -18,6 +22,12 @@ class LivreController {
     def create() {
         [livreInstance: new Livre(params)]
     }
+	
+	def recherche(){
+		println params
+		
+		//redirect(controller:"Livre" ,action: "recherche")
+	}
 
     def save() {
         def livreInstance = new Livre(params)
