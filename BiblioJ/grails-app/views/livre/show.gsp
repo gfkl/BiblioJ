@@ -45,10 +45,21 @@
 				<li class="fieldcontain">
 					<span id="nombreExemplairesDisponibles-label" class="property-label"><g:message code="livre.nombreExemplairesDisponibles.label" default="Nombre Exemplaires Disponibles" /></span>
 					
-						<span class="property-value" aria-labelledby="nombreExemplairesDisponibles-label"><g:fieldValue bean="${livreInstance}" field="nombreExemplairesDisponibles"/></span>
-					
+						<span class="property-value" aria-labelledby="nombreExemplairesDisponibles-label"><g:fieldValue bean="${livreInstance}" field="nombreExemplairesDisponibles"/>
+						<g:link action="emprunter" id="${(livreInstance.id)}"  params="[currentController: params.controller, currentAction: 'show']"> 
+								<input type="button" value="emprunter" class="button"/>
+								</g:link>
+								</span>
+
 				</li>
 				</g:if>
+				<g:else>
+				<li class="fieldcontain">
+					<span id="nombreExemplairesDisponibles-label" class="property-label"><g:message code="livre.nombreExemplairesDisponibles.label" default="Nombre Exemplaires Disponibles" /></span>
+											<span class="property-value" aria-labelledby="nombreExemplairesDisponibles-label"><p> Non disponible</p></span>
+					</li>
+					</g:else>
+				
 			
 				<g:if test="${livreInstance?.typeDocument}">
 				<li class="fieldcontain">

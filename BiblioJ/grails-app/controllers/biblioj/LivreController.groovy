@@ -24,10 +24,29 @@ class LivreController {
 	def create() {
 		[livreInstance: new Livre(params)]
 	}
-	
+
+	def emprunter(){
+
+		def livreInstance = Livre.get(params.id)
+		try {
+			if(livreInstance.nombreExemplairesDisponibles > 0){
+				livreInstance.nombreExemplairesDisponibles--
+				//Ajout dans le panier
+				livreInstance.save(flush: true)
+			}else
+				flash.message = "Plus de livre disponible"
+				
+		} catch	(org.springframework.dao.OptimisticLockingFailureException e) {
+			flash.message = "Plus de livre disponible"
+		} catch (org.springframework.dao.DataIntegrityViolationException e) {
+			flash.message = "Plus de livre disponible"
+		}
+		redirect(controller: params.controller, action: params.currentAction, id:params.id)
+	}
+
 	def recherche(){
 	}
-	
+
 	def listRecherche(){
 		def map = []
 		def livreInstance = Livre.list()
@@ -62,7 +81,7 @@ class LivreController {
 
 			}else
 				findAuteur = true
-				
+
 			if(findLivre == true && findType == true && findAuteur == true){
 				map.add('livre':curLivre)
 				size++
@@ -71,7 +90,7 @@ class LivreController {
 			findType = true
 			findAuteur = false
 		}
-		
+
 		[livreInstanceList: map,  livreInstanceTotal: size]
 	}
 

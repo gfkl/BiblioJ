@@ -31,6 +31,9 @@
 						<g:sortableColumn property="nombreExemplairesDisponibles" title="${message(code: 'livre.nombreExemplairesDisponibles.label', default: 'Nombre Exemplaires Disponibles')}" />
 					
 						<th><g:message code="livre.typeDocument.label" default="Type Document" /></th>
+						
+						<th><g:message code="livre.typeDocument.label" default="Emprunter" /></th>
+						
 					
 					</tr>
 				</thead>
@@ -45,7 +48,15 @@
 						<td>${(livreInstance.get('livre')).nombreExemplairesDisponibles}</td>
 					
 						<td>${(livreInstance.get('livre')).typeDocument}</td>
-					
+						
+						<g:if test="${(livreInstance.get('livre'))?.nombreExemplairesDisponibles}">
+						<td><g:link action="emprunter" id="${(livreInstance.get('livre')).id}" params="[currentController: params.controller, currentAction: 'show']"> 
+								<input type="button" value="emprunter" class="button"/></g:link></td>
+						</g:if>
+						<g:else>
+							<td><p>Non disponible</p></td>
+						</g:else>
+						
 					</tr>
 				</g:each>
 				</tbody>

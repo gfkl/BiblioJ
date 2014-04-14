@@ -32,6 +32,8 @@
 					
 						<th><g:message code="livre.typeDocument.label" default="Type Document" /></th>
 					
+						<th><g:message code="livre.typeDocument.label" default="Emprunter" /></th>
+					
 					</tr>
 				</thead>
 				<tbody>
@@ -45,7 +47,14 @@
 						<td>${fieldValue(bean: livreInstance, field: "nombreExemplairesDisponibles")}</td>
 					
 						<td>${fieldValue(bean: livreInstance, field: "typeDocument")}</td>
-					
+						
+						<g:if test="${livreInstance?.nombreExemplairesDisponibles}">
+						<td><g:link action="emprunter" id="${livreInstance.id}" params="[currentController: params.controller, currentAction: 'list']"> 
+								<input type="button" value="emprunter" class="button"/></g:link></td>
+						</g:if>
+						<g:else>
+							<td><p>Non disponible</p></td>
+						</g:else>
 					</tr>
 				</g:each>
 				</tbody>
