@@ -3,16 +3,18 @@ package biblioj
 
 
 import org.junit.*
+
 import grails.test.mixin.*
 
 @TestFor(ReservationLivreController)
 @Mock(ReservationLivre)
 class ReservationLivreControllerTests {
-
+	
     def populateValidParams(params) {
         assert params != null
         // TODO: Populate valid properties like...
-        //params["name"] = 'someValidName'
+        params['reservation'] = new Reservation(code:"Code",reservation: new Date())
+		params['livre'] = new Livre(titre:"Livre_1",nombreExemplaires:5,nombreExemplairesDisponibles:3)
     }
 
     void testIndex() {
@@ -102,7 +104,8 @@ class ReservationLivreControllerTests {
         // test invalid parameters in update
         params.id = reservationLivre.id
         //TODO: add invalid values to params object
-
+		params.livre = 20
+		
         controller.update()
 
         assert view == "/reservationLivre/edit"

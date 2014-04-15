@@ -11,7 +11,12 @@ import org.junit.*
 @TestFor(ReservationLivre)
 class ReservationLivreTests {
 
-    void testSomething() {
-       fail "Implement me"
-    }
+	void testSomething() {
+		Reservation r = new Reservation(code:"Code",reservation: new Date())
+		Livre l = new Livre(titre:"Livre_1",nombreExemplaires:5,nombreExemplairesDisponibles:3)
+		ReservationLivre rl = new ReservationLivre(livre:l, reservation:r)
+		
+		assertEquals(l, rl.livre)
+		assertEquals(r, rl.reservation)
+	}
 }

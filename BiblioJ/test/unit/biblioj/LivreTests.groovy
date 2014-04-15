@@ -12,6 +12,8 @@ import org.junit.*
 class LivreTests {
 
     void testSomething() {
-       fail "Implement me"
+       		Livre l = new Livre(titre:"Livre_1",nombreExemplaires:5,nombreExemplairesDisponibles:3)
+			assertEquals(l.titre, "Livre_1")
+
     }
 }

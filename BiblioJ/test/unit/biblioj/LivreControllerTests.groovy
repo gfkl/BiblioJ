@@ -3,153 +3,157 @@ package biblioj
 
 
 import org.junit.*
+
 import grails.test.mixin.*
 
 @TestFor(LivreController)
 @Mock(Livre)
 class LivreControllerTests {
 
-    def populateValidParams(params) {
-        assert params != null
-        // TODO: Populate valid properties like...
-        //params["name"] = 'someValidName'
-    }
+	def populateValidParams(params) {
+		assert params != null
+		// TODO: Populate valid properties like...
+		//params["name"] = 'someValidName'
+		params['titre'] = "Livre"
+		params['nombreExemplaires'] = 5
+		params['nombreExemplairesDisponibles'] = 2
+	}
 
-    void testIndex() {
-        controller.index()
-        assert "/livre/list" == response.redirectedUrl
-    }
+	void testIndex() {
+		controller.index()
+		assert "/livre/list" == response.redirectedUrl
+	}
 
-    void testList() {
+	void testList() {
 
-        def model = controller.list()
+		def model = controller.list()
 
-        assert model.livreInstanceList.size() == 0
-        assert model.livreInstanceTotal == 0
-    }
+		assert model.livreInstanceList.size() == 0
+		assert model.livreInstanceTotal == 0
+	}
 
-    void testCreate() {
-        def model = controller.create()
+	void testCreate() {
+		def model = controller.create()
 
-        assert model.livreInstance != null
-    }
+		assert model.livreInstance != null
+	}
 
-    void testSave() {
-        controller.save()
+	void testSave() {
+		controller.save()
 
-        assert model.livreInstance != null
-        assert view == '/livre/create'
+		assert model.livreInstance != null
+		assert view == '/livre/create'
 
-        response.reset()
+		response.reset()
 
-        populateValidParams(params)
-        controller.save()
+		populateValidParams(params)
+		controller.save()
 
-        assert response.redirectedUrl == '/livre/show/1'
-        assert controller.flash.message != null
-        assert Livre.count() == 1
-    }
+		assert response.redirectedUrl == '/livre/show/1'
+		assert controller.flash.message != null
+		assert Livre.count() == 1
+	}
 
-    void testShow() {
-        controller.show()
+	void testShow() {
+		controller.show()
 
-        assert flash.message != null
-        assert response.redirectedUrl == '/livre/list'
+		assert flash.message != null
+		assert response.redirectedUrl == '/livre/list'
 
-        populateValidParams(params)
-        def livre = new Livre(params)
+		populateValidParams(params)
+		def livre = new Livre(params)
 
-        assert livre.save() != null
+		assert livre.save() != null
 
-        params.id = livre.id
+		params.id = livre.id
 
-        def model = controller.show()
+		def model = controller.show()
 
-        assert model.livreInstance == livre
-    }
+		assert model.livreInstance == livre
+	}
 
-    void testEdit() {
-        controller.edit()
+	void testEdit() {
+		controller.edit()
 
-        assert flash.message != null
-        assert response.redirectedUrl == '/livre/list'
+		assert flash.message != null
+		assert response.redirectedUrl == '/livre/list'
 
-        populateValidParams(params)
-        def livre = new Livre(params)
+		populateValidParams(params)
+		def livre = new Livre(params)
 
-        assert livre.save() != null
+		assert livre.save() != null
 
-        params.id = livre.id
+		params.id = livre.id
 
-        def model = controller.edit()
+		def model = controller.edit()
 
-        assert model.livreInstance == livre
-    }
+		assert model.livreInstance == livre
+	}
 
-    void testUpdate() {
-        controller.update()
+	void testUpdate() {
+		controller.update()
 
-        assert flash.message != null
-        assert response.redirectedUrl == '/livre/list'
+		assert flash.message != null
+		assert response.redirectedUrl == '/livre/list'
 
-        response.reset()
+		response.reset()
 
-        populateValidParams(params)
-        def livre = new Livre(params)
+		populateValidParams(params)
+		def livre = new Livre(params)
 
-        assert livre.save() != null
+		assert livre.save() != null
 
-        // test invalid parameters in update
-        params.id = livre.id
-        //TODO: add invalid values to params object
+		// test invalid parameters in update
+		params.id = livre.id
+		//TODO: add invalid values to params object
+		params.nombreExemplaires = "Je suis un int"
+		controller.update()
 
-        controller.update()
+		assert view == "/livre/edit"
+		assert model.livreInstance != null
 
-        assert view == "/livre/edit"
-        assert model.livreInstance != null
+		livre.clearErrors()
 
-        livre.clearErrors()
+		populateValidParams(params)
+		controller.update()
 
-        populateValidParams(params)
-        controller.update()
+		assert response.redirectedUrl == "/livre/show/$livre.id"
+		assert flash.message != null
 
-        assert response.redirectedUrl == "/livre/show/$livre.id"
-        assert flash.message != null
+		//test outdated version number
+		response.reset()
+		livre.clearErrors()
 
-        //test outdated version number
-        response.reset()
-        livre.clearErrors()
+		populateValidParams(params)
+		params.id = livre.id
+		params.version = -1
+		controller.update()
 
-        populateValidParams(params)
-        params.id = livre.id
-        params.version = -1
-        controller.update()
+		assert view == "/livre/edit"
+		assert model.livreInstance != null
+		assert model.livreInstance.errors.getFieldError('version')
+		assert flash.message != null
+	}
 
-        assert view == "/livre/edit"
-        assert model.livreInstance != null
-        assert model.livreInstance.errors.getFieldError('version')
-        assert flash.message != null
-    }
+	void testDelete() {
+		controller.delete()
+		assert flash.message != null
+		assert response.redirectedUrl == '/livre/list'
 
-    void testDelete() {
-        controller.delete()
-        assert flash.message != null
-        assert response.redirectedUrl == '/livre/list'
+		response.reset()
 
-        response.reset()
+		populateValidParams(params)
+		def livre = new Livre(params)
 
-        populateValidParams(params)
-        def livre = new Livre(params)
+		assert livre.save() != null
+		assert Livre.count() == 1
 
-        assert livre.save() != null
-        assert Livre.count() == 1
+		params.id = livre.id
 
-        params.id = livre.id
+		controller.delete()
 
-        controller.delete()
-
-        assert Livre.count() == 0
-        assert Livre.get(livre.id) == null
-        assert response.redirectedUrl == '/livre/list'
-    }
+		assert Livre.count() == 0
+		assert Livre.get(livre.id) == null
+		assert response.redirectedUrl == '/livre/list'
+	}
 }

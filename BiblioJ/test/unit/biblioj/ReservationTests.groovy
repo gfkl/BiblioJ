@@ -11,7 +11,9 @@ import org.junit.*
 @TestFor(Reservation)
 class ReservationTests {
 
-    void testSomething() {
-       fail "Implement me"
-    }
+	void testSomething() {
+		Reservation r = new Reservation(code:"Code", reservation: new Date())
+
+		assertEquals(r.code, "Code")
+	}
 }

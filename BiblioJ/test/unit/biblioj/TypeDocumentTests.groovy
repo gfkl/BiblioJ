@@ -12,6 +12,8 @@ import org.junit.*
 class TypeDocumentTests {
 
     void testSomething() {
-       fail "Implement me"
+       TypeDocument t = new TypeDocument(intitule:"bla")
+	   
+	   assertEquals(t.intitule, "bla")
     }
 }
