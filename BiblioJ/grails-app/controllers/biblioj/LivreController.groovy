@@ -29,21 +29,19 @@ class LivreController {
 		def livreInstance = Livre.get(params.id)
 		def contains = false
 		def user = session["user"]
-		def map = []
+		def list = []
 
 		if (!user){
 			session["user"] = "Reservation"				
-			map.add(livreInstance)
-			session["panier"] = map
+			list.add(livreInstance)
+			session["panier"] = list
 
 		}else{
-			map = session["panier"]
-			if(!(livreInstance in map))		//redefinir methode equals
-				map.add(livreInstance)
-			session["panier"] = map
+			list = session["panier"]
+			if(!(livreInstance in list))		//redefinir methode equals
+				list.add(livreInstance)
+			session["panier"] = list
 		}
-	
-		println session
 
 		redirect(controller: params.controller, action: params.currentAction, id:params.id)
 	}
