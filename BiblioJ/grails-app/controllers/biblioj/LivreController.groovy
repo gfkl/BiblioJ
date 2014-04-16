@@ -26,21 +26,26 @@ class LivreController {
 	}
 
 	def emprunter(){
-
 		def livreInstance = Livre.get(params.id)
-		try {
-			if(livreInstance.nombreExemplairesDisponibles > 0){
-				livreInstance.nombreExemplairesDisponibles--
-				//Ajout dans le panier
-				livreInstance.save(flush: true)
-			}else
-				flash.message = "Plus de livre disponible"
-				
-		} catch	(org.springframework.dao.OptimisticLockingFailureException e) {
-			flash.message = "Plus de livre disponible"
-		} catch (org.springframework.dao.DataIntegrityViolationException e) {
-			flash.message = "Plus de livre disponible"
+		def contains = false
+		def user = session["user"]
+		def map = []
+
+		if (!user){
+			session["user"] = "Reservation"				
+			map.add('livre':livreInstance)
+			session["panier"] = map
+
+		}else{
+			map = session["panier"]
+			//(!(livreInstance in map))
+				map.add('livre':livreInstance)
+			session["panier"] = map
 		}
+	
+		println session
+		//add livreInstance panier
+
 		redirect(controller: params.controller, action: params.currentAction, id:params.id)
 	}
 
