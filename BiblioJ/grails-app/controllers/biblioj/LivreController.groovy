@@ -33,18 +33,17 @@ class LivreController {
 
 		if (!user){
 			session["user"] = "Reservation"				
-			map.add('livre':livreInstance)
+			map.add(livreInstance)
 			session["panier"] = map
 
 		}else{
 			map = session["panier"]
-			//(!(livreInstance in map))
-				map.add('livre':livreInstance)
+			if(!(livreInstance in map))		//redefinir methode equals
+				map.add(livreInstance)
 			session["panier"] = map
 		}
 	
 		println session
-		//add livreInstance panier
 
 		redirect(controller: params.controller, action: params.currentAction, id:params.id)
 	}

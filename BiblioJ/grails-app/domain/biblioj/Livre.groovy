@@ -5,21 +5,21 @@ class Livre {
 	int				nombreExemplaires
 	int				nombreExemplairesDisponibles
 	TypeDocument	typeDocument
-	
-	static hasMany = [auteurLivres : AuteurLivre, 
+
+	static hasMany = [auteurLivres : AuteurLivre,
 		reservationLivres : ReservationLivre]
-	
+
 	static mapping = {
 		typeDocument lazy : false
 	}
-	
-    static constraints = {
+
+	static constraints = {
 		titre nullable : false, blank : false
-		nombreExemplaires nullable : false		 
+		nombreExemplaires nullable : false
 		nombreExemplairesDisponibles nullable : false
 		typeDocument nullable : true
-    }
-	
+	}
+
 	public String toString() {
 		titre +" - "+typeDocument
 	}
