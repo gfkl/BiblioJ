@@ -40,17 +40,47 @@
 					
 				</li>
 				</g:if>
-			
+				
+				
 				<g:if test="${livreInstance?.nombreExemplairesDisponibles}">
+				<g:set var="find" value="${0}"/>
 				<li class="fieldcontain">
 					<span id="nombreExemplairesDisponibles-label" class="property-label"><g:message code="livre.nombreExemplairesDisponibles.label" default="Nombre Exemplaires Disponibles" /></span>
 					
 						<span class="property-value" aria-labelledby="nombreExemplairesDisponibles-label"><g:fieldValue bean="${livreInstance}" field="nombreExemplairesDisponibles"/>
-						<g:link action="emprunter" id="${(livreInstance.id)}"  params="[currentController: params.controller, currentAction: 'show']"> 
-								<input type="button" value="emprunter" class="button"/>
-								</g:link>
-								</span>
 
+						<g:set var="find" value="${0}"/>
+						<g:if test="${session?.user}">
+							<g:each in="${session.panier}" var="count" >
+								<g:if test="${((livreInstance.titre).toString()).equals(count.titre.toString())}">
+									<td><g:link action="removePanier" id="${livreInstance.id}" params="[currentController: params.controller, currentAction: 'show']"> 
+										<input type="button" value="Remove" class="button"/></g:link></td>
+								
+									<g:set var="find" value="${1}"/>
+								</g:if>
+							</g:each>
+							<g:if test="${find == 0}">
+								<g:if test="${livreInstance?.nombreExemplairesDisponibles}">
+								<td><g:link action="emprunter" id="${livreInstance.id}" params="[currentController: params.controller, currentAction: 'show']"> 
+										<input type="button" value="emprunter" class="button"/></g:link></td>
+								</g:if>
+								<g:else>
+									<td><p>Non disponible</p></td>
+								</g:else>
+							</g:if>
+							
+						</g:if>
+						<g:else>
+							<g:if test="${livreInstance?.nombreExemplairesDisponibles}">
+							<td><g:link action="emprunter" id="${livreInstance.id}" params="[currentController: params.controller, currentAction: 'show']"> 
+									<input type="button" value="emprunter" class="button"/></g:link></td>
+							</g:if>
+							<g:else>
+								<td><p>Non disponible</p></td>
+							</g:else>
+						</g:else>
+					</span>
+					
 				</li>
 				</g:if>
 				<g:else>
