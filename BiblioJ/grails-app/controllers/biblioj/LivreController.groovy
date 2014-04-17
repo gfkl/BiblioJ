@@ -48,6 +48,22 @@ class LivreController {
 
 	def recherche(){
 	}
+	
+	def removePanier(){
+		def livreInstance = Livre.get(params.id)
+		def list = session["panier"]
+		def memLivreInPanier
+		list.each { curPanier ->
+			if(curPanier.titre.equals(livreInstance.titre)){
+				memLivreInPanier = curPanier
+				return
+			}
+		}
+		
+		list.remove(memLivreInPanier)
+		
+		redirect(controller: params.controller, action: params.currentAction, id:params.id)
+	}
 
 	def listRecherche(){
 		def map = []

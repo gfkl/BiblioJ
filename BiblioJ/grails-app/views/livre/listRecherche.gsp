@@ -39,6 +39,7 @@
 				</thead>
 				<tbody>
 				<g:each in="${livreInstanceList}" status="i" var="livreInstance">
+					<g:set var="find" value="${0}"/>
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 					
 						<td><g:link action="show" id="${(livreInstance.get('livre')).id}">${(livreInstance.get('livre')).titre}</g:link></td>
@@ -49,15 +50,39 @@
 					
 						<td>${(livreInstance.get('livre')).typeDocument}</td>
 						
-						<g:if test="${(livreInstance.get('livre'))?.nombreExemplairesDisponibles}">
-						<td><g:link action="emprunter" id="${(livreInstance.get('livre')).id}" params="[currentController: params.controller, currentAction: 'show']"> 
-								<input type="button" value="emprunter" class="button"/></g:link></td>
+						
+						
+						
+						<g:if test="${session?.user}">
+							<g:each in="${session.panier}" var="count" >
+								<g:if test="${((livreInstance.get('livre').titre.toString()).equals(count.titre.toString()))}">
+									<g:set var="find" value="${1}"/>
+									<td><g:link action="removePanier" id="${(livreInstance.get('livre')).id}" params="[currentController: params.controller, currentAction: 'list']"> 
+										<input type="button" value="Remove" class="button"/></g:link></td>
+								</g:if>
+							</g:each>
+							<g:if test="${find == 0}">
+								<g:if test="${(livreInstance.get('livre'))?.nombreExemplairesDisponibles}">
+									<td><g:link action="emprunter" id="${(livreInstance.get('livre')).id}" params="[currentController: params.controller, currentAction: 'list']"> 
+										<input type="button" value="emprunter" class="button"/></g:link></td>
+								</g:if>
+								<g:else>
+									<td><p>Non disponible</p></td>
+								</g:else>
+							</g:if>
+							
 						</g:if>
 						<g:else>
-							<td><p>Non disponible</p></td>
+							<g:if test="${(livreInstance.get('livre'))?.nombreExemplairesDisponibles}">
+							<td><g:link action="emprunter" id="${(livreInstance.get('livre'))?.nombreExemplairesDisponibles}" params="[currentController: params.controller, currentAction: 'list']"> 
+									<input type="button" value="emprunter" class="button"/></g:link></td>
+							</g:if>
+							<g:else>
+								<td><p>Non disponible</p></td>
+							</g:else>
 						</g:else>
-						
 					</tr>
+
 				</g:each>
 				</tbody>
 			</table>
