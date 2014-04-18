@@ -5,6 +5,8 @@ import org.springframework.dao.DataIntegrityViolationException
 
 class LivreController {
 
+	GestionPanierService gestionPanierService;
+	
 	static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
 	def index() {
@@ -26,23 +28,7 @@ class LivreController {
 	}
 
 	def emprunter(){
-		def livreInstance = Livre.get(params.id)
-		def contains = false
-		def user = session["user"]
-		def list = []
-
-		if (!user){
-			session["user"] = "Reservation"				
-			list.add(livreInstance)
-			session["panier"] = list
-
-		}else{
-			list = session["panier"]
-			if(!(livreInstance in list))		//redefinir methode equals
-				list.add(livreInstance)
-			session["panier"] = list
-		}
-
+		gestionPanierService.emprunter(params, session)
 		redirect(controller: params.controller, action: params.currentAction, id:params.id)
 	}
 
@@ -50,17 +36,7 @@ class LivreController {
 	}
 	
 	def removePanier(){
-		def livreInstance = Livre.get(params.id)
-		def list = session["panier"]
-		def memLivreInPanier
-		list.each { curPanier ->
-			if(curPanier.titre.equals(livreInstance.titre)){
-				memLivreInPanier = curPanier
-				return
-			}
-		}
-		
-		list.remove(memLivreInPanier)
+		gestionPanierService.removePanier(params, session)
 		
 		redirect(controller: params.controller, action: params.currentAction, id:params.id)
 	}
