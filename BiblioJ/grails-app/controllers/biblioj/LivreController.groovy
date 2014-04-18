@@ -7,8 +7,8 @@ class LivreController {
 
 	GestionPanierService gestionPanierService
 	LivreRechercheService livreRechercheService
-	
-	
+
+
 	static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
 	def index() {
@@ -49,10 +49,9 @@ class LivreController {
 		def mapOffset = []
 		def livreInstance = Livre.list()
 
-		params.max = Math.min(max ?: 5, 5)
-
 		map = livreRechercheService.rechercheLivre(params, livreInstance)
 		mapOffset = livreRechercheService.mapByOffset(map, params, myOffset)
+		params.max = Math.min(max ?: 5, 5)
 
 		[livreInstanceList: mapOffset,  livreInstanceTotal: map.size()]
 	}

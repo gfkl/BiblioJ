@@ -2,32 +2,33 @@ package biblioj
 
 class LivreRechercheService {
 
-	def rechercheLivre(def params, def livreInstance) {
+	def rechercheLivre(def varParams, def livreInstance) {
 		def findLivre = true
 		def findType = true
 		def findAuteur = false
 		def typeLivre = null
 		def map = []
-
+		println varParams
+		
 		try{
-			if(params.typeDocument != null)
-				typeLivre = TypeDocument.get(params.typeDocument.get('id'))
+			if(varParams.typeDocument != null || varParams.typeDocument.get('id') != null)
+				typeLivre = TypeDocument.get(varParams.typeDocument.get('id'))
 		}catch(e) {
 			typeLivre = null
 		}
-
+		println typeLivre
 		livreInstance.each { curLivre ->
-			if(!params.titre.equals("")){
-				if(!(curLivre.titre.toLowerCase() ==~ ".*"+params.titre.toLowerCase()+".*"))
+			if(!varParams.titre.equals("")){
+				if(!(curLivre.titre.toLowerCase() ==~ ".*"+varParams.titre.toLowerCase()+".*"))
 					findLivre = false
 			}
 			if(typeLivre != null){
 				if(!curLivre.typeDocument.equals(typeLivre))
 					findType = false
 			}
-			if(!params.auteur.equals("")){
+			if(!varParams.auteur.equals("")){
 				curLivre.auteurLivres.each{  curLivreAuteur ->
-					if(curLivreAuteur.auteur.nom.toLowerCase() ==~ ".*"+params.auteur.toLowerCase()+".*"){
+					if(curLivreAuteur.auteur.nom.toLowerCase() ==~ ".*"+varParams.auteur.toLowerCase()+".*"){
 						findAuteur = true
 					}
 				}
