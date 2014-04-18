@@ -57,13 +57,13 @@
 							<g:each in="${session.panier}" var="count" >
 								<g:if test="${((livreInstance.get('livre').titre.toString()).equals(count.titre.toString()))}">
 									<g:set var="find" value="${1}"/>
-									<td><g:link action="removePanier" id="${(livreInstance.get('livre')).id}" params="[currentController: params.controller, currentAction: 'list']"> 
+									<td><g:link action="removePanier" id="${(livreInstance.get('livre')).id}" params="[currentController: params.controller, currentAction: 'show']"> 
 										<input type="button" value="Remove" class="button"/></g:link></td>
 								</g:if>
 							</g:each>
 							<g:if test="${find == 0}">
 								<g:if test="${(livreInstance.get('livre'))?.nombreExemplairesDisponibles}">
-									<td><g:link action="emprunter" id="${(livreInstance.get('livre')).id}" params="[currentController: params.controller, currentAction: 'list']"> 
+									<td><g:link action="emprunter" id="${(livreInstance.get('livre')).id}" params="[currentController: params.controller, currentAction: 'show']"> 
 										<input type="button" value="emprunter" class="button"/></g:link></td>
 								</g:if>
 								<g:else>
@@ -74,7 +74,7 @@
 						</g:if>
 						<g:else>
 							<g:if test="${(livreInstance.get('livre'))?.nombreExemplairesDisponibles}">
-							<td><g:link action="emprunter" id="${(livreInstance.get('livre'))?.nombreExemplairesDisponibles}" params="[currentController: params.controller, currentAction: 'list']"> 
+							<td><g:link action="emprunter" id="${(livreInstance.get('livre'))?.nombreExemplairesDisponibles}" params="[currentController: params.controller, currentAction: 'show']"> 
 									<input type="button" value="emprunter" class="button"/></g:link></td>
 							</g:if>
 							<g:else>

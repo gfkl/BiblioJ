@@ -5,7 +5,9 @@ import org.springframework.dao.DataIntegrityViolationException
 
 class LivreController {
 
-	GestionPanierService gestionPanierService;
+	GestionPanierService gestionPanierService
+	LivreRechercheService livreRechercheService
+	
 	
 	static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
@@ -34,58 +36,25 @@ class LivreController {
 
 	def recherche(){
 	}
-	
+
 	def removePanier(){
 		gestionPanierService.removePanier(params, session)
-		
+
 		redirect(controller: params.controller, action: params.currentAction, id:params.id)
 	}
 
-	def listRecherche(){
+	def listRecherche(Integer max){
+		int myOffset = 4
 		def map = []
+		def mapOffset = []
 		def livreInstance = Livre.list()
-		def findLivre = true
-		def findType = true
-		def findAuteur = false
-		def typeLivre = null
-		def size = 0
 
-		try{
-			if(params.typeDocument != null)
-				typeLivre = TypeDocument.get(params.typeDocument.get('id'))
-		}catch(e) {
-			typeLivre = null
-		}
+		params.max = Math.min(max ?: 5, 5)
 
-		livreInstance.each { curLivre ->
-			if(!params.titre.equals("")){
-				if(!(curLivre.titre.toLowerCase() ==~ ".*"+params.titre.toLowerCase()+".*"))
-					findLivre = false
-			}
-			if(typeLivre != null){
-				if(!curLivre.typeDocument.equals(typeLivre))
-					findType = false
-			}
-			if(!params.auteur.equals("")){
-				curLivre.auteurLivres.each{  curLivreAuteur ->
-					if(curLivreAuteur.auteur.nom.toLowerCase() ==~ ".*"+params.auteur.toLowerCase()+".*"){
-						findAuteur = true
-					}
-				}
+		map = livreRechercheService.rechercheLivre(params, livreInstance)
+		mapOffset = livreRechercheService.mapByOffset(map, params, myOffset)
 
-			}else
-				findAuteur = true
-
-			if(findLivre == true && findType == true && findAuteur == true){
-				map.add('livre':curLivre)
-				size++
-			}
-			findLivre = true
-			findType = true
-			findAuteur = false
-		}
-
-		[livreInstanceList: map,  livreInstanceTotal: size]
+		[livreInstanceList: mapOffset,  livreInstanceTotal: map.size()]
 	}
 
 	def save() {
