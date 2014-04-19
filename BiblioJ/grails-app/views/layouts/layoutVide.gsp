@@ -9,7 +9,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-<title><g:layoutTitle default="Grails" /></title>
+<title><g:layoutTitle default="index" /></title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="shortcut icon"
 	href="${resource(dir: 'images', file: 'favicon.ico')}"
@@ -32,6 +32,14 @@
 	href="${resource(dir: 'css', file: 'mobile.css')}" type="text/css">
 <g:layoutHead />
 <r:layoutResources />
+
+<style type="text/css">
+#largeur {
+	margin: 0 auto;
+	width: 980px;
+	background-color: #DDDDDD
+}
+</style>
 </head>
 <body>
 
@@ -47,31 +55,6 @@
 			</h1>
 		</div>
 	</div>
-
-	<!--==============================panier=================================-->
-	<div class="panier">
-		<t2>Mon panier : </t2>
-		<ul>
-			<g:if test="${session?.user}">
-				<g:each in="${session.panier}" var="livreInstance">
-					<li><g:link controller="livre" action="removePanier"
-							id="${livreInstance.id}"
-							params="[currentController: params.controller, currentAction: params.action, offset: params.offset, titreLivre:params.titre, auteurLivre:params.auteur, typeDocumentId:params.typeDocumentId]">
-							${fieldValue(bean: livreInstance, field: "titre")}
-							<img
-								src="${resource(dir: 'images', file: '../images/icon_croix.png')}"
-								width="10" height="10" />
-						</g:link></li>
-				</g:each>
-			</g:if>
-			<g:else>
-				<li>Vide</li>
-			</g:else>
-
-		</ul>
-	</div>
-
-
 	<!--========<g:layoutBody />======================content================================-->
 	<g:layoutBody />
 	<div class="footer" role="contentinfo"></div>
@@ -80,5 +63,9 @@
 	</div>
 	<g:javascript library="application" />
 	<r:layoutResources />
+
+
+
+	<!--  -->
 </body>
 </html>

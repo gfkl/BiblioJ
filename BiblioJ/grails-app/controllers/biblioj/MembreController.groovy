@@ -10,16 +10,31 @@ class MembreController {
 		redirect(action: "list", params: params)
 	}
 
+	def indexInscription(){
+		redirect(controller:"Membre" ,action: "inscription")
+	}
+
+	def inscription(){
+
+	}
+
+	def inscriptionForm(){
+		if(Membre.findByLogin(params.login)){
+			flash.message = "Le login "+params.login+" est déjà utilisé"
+			redirect(controller:"Membre" ,action: "inscription")
+		}else{
+			(new Membre(login:params.login,mdp:params.mdp,status:"client")).save()
+			flash.message = "Compte créer : login : "+params.login+" - mdp : "+params.mdp
+			redirect(uri:'/')
+		}
+	}
+
 	def list(Integer max) {
 		params.max = Math.min(max ?: 10, 100)
 		[membreInstanceList: Membre.list(params), membreInstanceTotal: Membre.count()]
 	}
 
 	def connection(){
-		println params
-		println Membre.list()
-		println Membre.findByLoginAndMdp(params.login, params.mdp)
-		
 		if(Membre.findByLoginAndMdp(params.login, params.mdp)){
 			session["user"] = params.login
 			session["status"] = params.status

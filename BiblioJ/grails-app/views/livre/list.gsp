@@ -54,16 +54,16 @@
 						<g:if test="${session?.user}">
 							<g:each in="${session.panier}" var="count" >
 								<g:if test="${(fieldValue(bean: livreInstance, field:'titre').toString()).equals(count.titre.toString())}">
-									<td><g:link action="removePanier" id="${livreInstance.id}" params="[currentController: params.controller, currentAction: 'list']"> 
-										<input type="button" value="Remove" class="button"/></g:link></td>
+									<td><g:link action="removePanier" id="${livreInstance.id}" params="[currentController: params.controller, currentAction: 'list', offset: params.offset]"> 
+										<input type="button" value="Retirer" class="button"/></g:link></td>
 								
 									<g:set var="find" value="${1}"/>
 								</g:if>
 							</g:each>
 							<g:if test="${find == 0}">
 								<g:if test="${livreInstance?.nombreExemplairesDisponibles}">
-								<td><g:link action="emprunter" id="${livreInstance.id}" params="[currentController: params.controller, currentAction: 'list']"> 
-										<input type="button" value="emprunter" class="button"/></g:link></td>
+								<td><g:link action="emprunter" id="${livreInstance.id}" params="[currentController: params.controller, currentAction: 'list', offset: params.offset]"> 
+										<input type="button" value="Emprunter" class="button"/></g:link></td>
 								</g:if>
 								<g:else>
 									<td><p>Non disponible</p></td>
@@ -73,8 +73,8 @@
 						</g:if>
 						<g:else>
 							<g:if test="${livreInstance?.nombreExemplairesDisponibles}">
-							<td><g:link action="emprunter" id="${livreInstance.id}" params="[currentController: params.controller, currentAction: 'list']"> 
-									<input type="button" value="emprunter" class="button"/></g:link></td>
+							<td><g:link action="emprunter" id="${livreInstance.id}" params="[currentController: params.controller, currentAction: 'list', offset: params.offset]"> 
+									<input type="button" value="Emprunter" class="button"/></g:link></td>
 							</g:if>
 							<g:else>
 								<td><p>Non disponible</p></td>
