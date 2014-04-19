@@ -6,14 +6,13 @@ class LoadDataService extends Exception{
 
 	def openExelData(){
 		def myFile = new File("./web-app/data/Les 1000 titres les plus recherches en 2012.csv")
-		myFile.metaClass.setText = { String s -> delegate.setText(s, 'UTF-8') }
 		
 		myFile.splitEachLine(';')  { fields ->
 			def type = fields[1]
 			def titre = fields[3]
 			def auteur = fields[4]
-			def randomDispo = Math.abs(new Random().nextInt() % 10 + 1)
-			def randomTotal = Math.abs(new Random().nextInt() % 10 + randomDispo)
+			def randomTotal = Math.abs(new Random().nextInt() % 10 + 1)
+			def randomDispo = Math.abs(new Random().nextInt() % 10 + randomTotal)
 			
 			if(!(TypeDocument.findByIntitule(type)))
 				(new TypeDocument(intitule:type)).save()

@@ -6,7 +6,7 @@ class ContentCartTagLib {
 		session.panier.each{ livre ->
 			out << "<li>"
 			out << livre.getTitre().toString() + 
-			"<g:link action=\"removePanier\" id=\"" + livre.getId().toString() + " \">" +
+			"<g:link controller=\"livre \"action=\"removePanier\" id=\"" + livre.getId().toString() + " \">" +
 			"  <img src=\"${resource(dir: 'images', file: '../images/icon_croix.png')}\" width=\"10\" height=\"10\"/>" +
 			"</g:link>"
 			out << "</li>"

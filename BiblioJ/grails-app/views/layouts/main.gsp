@@ -33,10 +33,24 @@
 </div>
 
   <!--==============================panier=================================-->
-   	<div class="panier">
-    		<p>Votre panier :</p>
-			<g:panierUser/>
+    	<div class="panier">
+    		<ul>
+			<g:if test="${session?.user}">
+				<g:each in="${session.panier}" var="livreInstance" >
+						<li><g:link controller="livre" action="removePanier" id="${livreInstance.id}" params="[currentController: 'index']">
+							${fieldValue(bean: livreInstance, field: "titre")}
+							<img src="${resource(dir: 'images', file: '../images/icon_croix.png')}" width="10" height="10"/>
+							</g:link>
+						</li>
+				</g:each>
+			</g:if>
+			<g:else>
+				<li>Vide</li>
+			</g:else>
+			
+			</ul>
     	</div>
+
 
   <!--========<g:layoutBody />======================content================================-->
 	<g:layoutBody />
