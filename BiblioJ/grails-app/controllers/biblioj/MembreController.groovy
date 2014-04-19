@@ -22,6 +22,7 @@ class MembreController {
 		
 		if(Membre.findByLoginAndMdp(params.login, params.mdp)){
 			session["user"] = params.login
+			session["status"] = params.status
 			redirect(uri:'/')
 		}else{
 			flash.message = "Erreur lors de la connection"
