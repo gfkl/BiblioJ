@@ -59,6 +59,10 @@
 
 
 	<g:if test="${session?.user}">
+		<div>
+			Bonjour ${session.user}<br/>
+			Déconnexion
+		</div>
 		<div class="panier">
 			<t2>Mon panier : </t2>
 			<ul>
