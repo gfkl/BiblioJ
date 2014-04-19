@@ -51,6 +51,11 @@ class LivreRechercheService {
 		def mapRet = []
 		def size = map.size()
 
+		if (size == 0) {
+			// retourner un truc (le top : un throw avec un try catch dans le controler)
+			// avec un affichage de flash message ici ou au dessus.
+			
+		}
 		if(params?.offset){
 			def place = params.offset.toInteger()
 			if(place+myOffset > size-1)

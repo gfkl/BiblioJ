@@ -31,7 +31,7 @@ class LivreController {
 
 	def emprunter(){
 		gestionPanierService.emprunter(params, session)
-		redirect(controller: params.controller, action: params.currentAction, id:params.id)
+		redirect(controller: params.controller, action: params.currentAction)	
 	}
 
 	def recherche(){
