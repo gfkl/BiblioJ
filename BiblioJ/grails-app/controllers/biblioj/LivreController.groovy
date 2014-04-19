@@ -33,20 +33,23 @@ class LivreController {
 		gestionPanierService.emprunter(params, session)
 		//redirect(controller: params.controller, action: params.currentAction)
 
-
 		if(params.currentAction.equals("index"))
 			redirect(uri:'/')
 		else if(params.currentAction.equals("list")){
 			redirect(action:"list", params:[offset:params.offset])
 		}else if(params.currentAction.equals("listRecherche")){
-			println params
-			println "___________"+params.dataRecherche
-		
-			def titreVar = params.dataRecherche.titre
-			def artisteVar = params.dataRecherche.artiste
-			def typeVar = params.dataRecherche.typeDocumentId
-			
-			redirect(action:"listRecherche", params:[offset:params.offset, titre:titreVar, artiste:artisteVar, typeDocumentId:typeVar])
+			def titreVar = params.titreLivre
+			if(titreVar == null)
+				titreVar =""
+			def auteurVar = params.auteurLivre
+			if(auteurVar == null)
+				auteurVar = ""
+			def typeVar = params.typeDocumentId
+			if(typeVar == null)
+				typeVar = ""
+			println typeVar
+
+			redirect(action:"listRecherche", params:[offset:params.offset, titre:titreVar, auteur:auteurVar, typeDocumentId:typeVar])
 		}else
 			redirect(controller: params.controller, action: params.currentAction, id:params.id)
 
@@ -64,7 +67,18 @@ class LivreController {
 		else if(params.currentAction.equals("list")){
 			redirect(action:"list", params:[offset:params.offset])
 		}else if(params.currentAction.equals("listRecherche")){
-			redirect(action:"listRecherche", params:[offset:params.offset])
+			def titreVar = params.titreLivre
+			if(titreVar == null)
+				titreVar =""
+			def auteurVar = params.auteurLivre
+			if(auteurVar == null)
+				auteurVar = ""
+			def typeVar = params.typeDocumentId
+			if(typeVar == null)
+				typeVar = ""
+			println typeVar
+
+			redirect(action:"listRecherche", params:[offset:params.offset, titre:titreVar, auteur:auteurVar, typeDocumentId:typeVar])
 		}else
 			redirect(controller: params.controller, action: params.currentAction, id:params.id)
 	}

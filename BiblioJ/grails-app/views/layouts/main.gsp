@@ -56,7 +56,7 @@
 				<g:each in="${session.panier}" var="livreInstance">
 					<li><g:link controller="livre" action="removePanier"
 							id="${livreInstance.id}"
-							params="[currentController: params.controller, currentAction: params.action, offset: params.offset]">
+							params="[currentController: params.controller, currentAction: params.action, offset: params.offset, titreLivre:params.titre, auteurLivre:params.auteur, typeDocumentId:params.typeDocumentId]">
 							${fieldValue(bean: livreInstance, field: "titre")}
 							<img
 								src="${resource(dir: 'images', file: '../images/icon_croix.png')}"
