@@ -2,10 +2,7 @@ package biblioj
 
 
 
-import java.util.Date;
-
 import org.junit.*
-
 import grails.test.mixin.*
 
 @TestFor(ReservationController)
@@ -15,8 +12,7 @@ class ReservationControllerTests {
     def populateValidParams(params) {
         assert params != null
         // TODO: Populate valid properties like...
-        params['code'] = "Je suis le code"
-		params['reservation'] = new Date()
+        //params["name"] = 'someValidName'
     }
 
     void testIndex() {
@@ -106,8 +102,7 @@ class ReservationControllerTests {
         // test invalid parameters in update
         params.id = reservation.id
         //TODO: add invalid values to params object
-		params.reservation = "Je suis une erreur"
-		
+
         controller.update()
 
         assert view == "/reservation/edit"

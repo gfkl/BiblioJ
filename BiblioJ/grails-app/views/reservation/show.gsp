@@ -41,6 +41,15 @@
 				</li>
 				</g:if>
 			
+				<g:if test="${reservationInstance?.membre}">
+				<li class="fieldcontain">
+					<span id="membre-label" class="property-label"><g:message code="reservation.membre.label" default="Membre" /></span>
+					
+						<span class="property-value" aria-labelledby="membre-label"><g:link controller="membre" action="show" id="${reservationInstance?.membre?.id}">${reservationInstance?.membre?.encodeAsHTML()}</g:link></span>
+					
+				</li>
+				</g:if>
+			
 				<g:if test="${reservationInstance?.reservationLivres}">
 				<li class="fieldcontain">
 					<span id="reservationLivres-label" class="property-label"><g:message code="reservation.reservationLivres.label" default="Reservation Livres" /></span>

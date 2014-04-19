@@ -18,6 +18,14 @@
 	<g:datePicker name="reservation" precision="day"  value="${reservationInstance?.reservation}"  />
 </div>
 
+<div class="fieldcontain ${hasErrors(bean: reservationInstance, field: 'membre', 'error')} required">
+	<label for="membre">
+		<g:message code="reservation.membre.label" default="Membre" />
+		<span class="required-indicator">*</span>
+	</label>
+	<g:select id="membre" name="membre.id" from="${biblioj.Membre.list()}" optionKey="id" required="" value="${reservationInstance?.membre?.id}" class="many-to-one"/>
+</div>
+
 <div class="fieldcontain ${hasErrors(bean: reservationInstance, field: 'reservationLivres', 'error')} ">
 	<label for="reservationLivres">
 		<g:message code="reservation.reservationLivres.label" default="Reservation Livres" />
