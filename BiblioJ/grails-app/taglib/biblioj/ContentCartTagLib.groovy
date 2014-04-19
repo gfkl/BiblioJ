@@ -6,11 +6,13 @@ class ContentCartTagLib {
 		session.panier.each{ livre ->
 			out << "<li>"
 			out << livre.getTitre().toString() + 
-//			"<g:link action=\"updatePlusNote\" id=\"${ligneInstance.id}\">" +
-			"  <img src=\"${resource(dir: 'images', file: '../images/icon_croix.png')}\" width=\"10\" height=\"10\"/>"
-//			"</g:link>"
+			"<g:link action=\"removePanier\" id=\"" + livre.getId().toString() + " \">" +
+			"  <img src=\"${resource(dir: 'images', file: '../images/icon_croix.png')}\" width=\"10\" height=\"10\"/>" +
+			"</g:link>"
 			out << "</li>"
 		}
+		if (session.panier.findAll().size == 0)
+			out << "vide"
 		out << "</ul>"
 	}	
 }
