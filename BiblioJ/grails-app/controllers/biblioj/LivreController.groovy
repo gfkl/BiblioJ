@@ -31,7 +31,17 @@ class LivreController {
 
 	def emprunter(){
 		gestionPanierService.emprunter(params, session)
-		redirect(controller: params.controller, action: params.currentAction)
+		//redirect(controller: params.controller, action: params.currentAction)
+		println params
+		
+		if(params.currentAction.equals("index"))
+			redirect(uri:'/')
+		else if(params.currentAction.equals("list")){
+			redirect(action:"list", params:[offset:params.offset])
+		}else if(params.currentAction.equals("listRecherche")){
+			redirect(action:"listRecherche", params:[offset:params.offset])
+		}else
+			redirect(controller: params.controller, action: params.currentAction, id:params.id)
 	}
 
 	def recherche(){
@@ -39,12 +49,13 @@ class LivreController {
 
 	def removePanier(){
 		gestionPanierService.removePanier(params, session)
-		
+
 		if(params.currentAction.equals("index"))
 			redirect(uri:'/')
 		else if(params.currentAction.equals("list")){
-			println params
 			redirect(action:"list", params:[offset:params.offset])
+		}else if(params.currentAction.equals("listRecherche")){
+			redirect(action:"listRecherche", params:[offset:params.offset])
 		}else
 			redirect(controller: params.controller, action: params.currentAction, id:params.id)
 	}
