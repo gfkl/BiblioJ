@@ -5,10 +5,10 @@ class GestionPanierService {
     def emprunter(def params, def session) {
 		def livreInstance = Livre.get(params.id)
 		def contains = false
-		def user = session["user"]
+		def panier = session["panier"]
 		def list = []
 
-		if (!user){
+		if (!panier){
 			list.add(livreInstance)
 			session["panier"] = list
 

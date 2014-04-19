@@ -39,12 +39,12 @@ class LivreController {
 
 	def removePanier(){
 		gestionPanierService.removePanier(params, session)
-		println params
 		
-		if(params.currentController.equals("index"))
+		if(params.currentAction.equals("index"))
 			redirect(uri:'/')
 		else if(params.currentAction.equals("list")){
-			redirect(action:"list", offset:params.offset)
+			println params
+			redirect(action:"list", params:[offset:params.offset])
 		}else
 			redirect(controller: params.controller, action: params.currentAction, id:params.id)
 	}
