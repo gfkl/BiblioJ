@@ -16,11 +16,11 @@ class LivreController {
 	}
 
 	def indexRecherche(){
-		//redirect(uri: "livre/recherche")
 		redirect(controller:"Livre" ,action: "recherche")
 	}
 
 	def list(Integer max) {
+		println params
 		params.max = Math.min(max ?: 10, 100)
 		[livreInstanceList: Livre.list(params), livreInstanceTotal: Livre.count()]
 	}
@@ -44,7 +44,7 @@ class LivreController {
 		if(params.currentController.equals("index"))
 			redirect(uri:'/')
 		else if(params.currentController.equals("list")){
-			
+			redirect(action:"list", offset:params.offset)
 		}else
 			redirect(controller: params.controller, action: params.currentAction, id:params.id)
 	}
