@@ -32,16 +32,25 @@ class LivreController {
 	def emprunter(){
 		gestionPanierService.emprunter(params, session)
 		//redirect(controller: params.controller, action: params.currentAction)
-		println params
-		
+
+
 		if(params.currentAction.equals("index"))
 			redirect(uri:'/')
 		else if(params.currentAction.equals("list")){
 			redirect(action:"list", params:[offset:params.offset])
 		}else if(params.currentAction.equals("listRecherche")){
-			redirect(action:"listRecherche", params:[offset:params.offset])
+			println params
+			println "___________"+params.dataRecherche
+		
+			def titreVar = params.dataRecherche.titre
+			def artisteVar = params.dataRecherche.artiste
+			def typeVar = params.dataRecherche.typeDocumentId
+			
+			redirect(action:"listRecherche", params:[offset:params.offset, titre:titreVar, artiste:artisteVar, typeDocumentId:typeVar])
 		}else
 			redirect(controller: params.controller, action: params.currentAction, id:params.id)
+
+
 	}
 
 	def recherche(){
@@ -61,6 +70,7 @@ class LivreController {
 	}
 
 	def listRecherche(Integer max){
+
 		int myOffset = 4
 		def map = []
 		def mapOffset = []

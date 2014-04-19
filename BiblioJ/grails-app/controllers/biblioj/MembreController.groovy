@@ -16,10 +16,6 @@ class MembreController {
 	}
 
 	def connection(){
-		println params
-		println Membre.list()
-		println Membre.findByLoginAndMdp(params.login, params.mdp)
-		
 		if(Membre.findByLoginAndMdp(params.login, params.mdp)){
 			session["user"] = params.login
 			redirect(uri:'/')
