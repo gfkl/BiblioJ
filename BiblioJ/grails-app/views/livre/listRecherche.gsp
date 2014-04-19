@@ -30,7 +30,7 @@
 					
 						<th><g:message code="livre.typeDocument.label" default="Type Document" /></th>
 						
-						<th><g:message default="Auteur"/></th>
+						<th><g:message code="Auteur" default="Auteur"/></th>
 						
 						<th><g:message code="livre.typeDocument.label" default="Emprunter" /></th>
 						

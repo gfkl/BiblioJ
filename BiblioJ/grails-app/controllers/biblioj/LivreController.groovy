@@ -31,7 +31,7 @@ class LivreController {
 
 	def emprunter(){
 		gestionPanierService.emprunter(params, session)
-		redirect(controller: params.controller, action: params.currentAction)	
+		redirect(controller: params.controller, action: params.currentAction)
 	}
 
 	def recherche(){
@@ -50,10 +50,15 @@ class LivreController {
 		def livreInstance = Livre.list()
 
 		map = livreRechercheService.rechercheLivre(params, livreInstance)
-		mapOffset = livreRechercheService.mapByOffset(map, params, myOffset)
-		params.max = Math.min(max ?: 5, 5)
+		try{
+			mapOffset = livreRechercheService.mapByOffset(map, params, myOffset)
+			params.max = Math.min(max ?: 5, 5)
+			[livreInstanceList: mapOffset,  livreInstanceTotal: map.size()]
+		}catch(e){
+			flash.message = "Aucun résultat trouvé"
+			[livreInstanceList: map,  livreInstanceTotal: 0]
+		}
 
-		[livreInstanceList: mapOffset,  livreInstanceTotal: map.size()]
 	}
 
 	def save() {

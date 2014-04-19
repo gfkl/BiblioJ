@@ -1,6 +1,6 @@
 package biblioj
 
-class LivreRechercheService {
+class LivreRechercheService extends Exception{
 
 	def rechercheLivre(def varParams, def livreInstance) {
 		def findLivre = true
@@ -53,7 +53,7 @@ class LivreRechercheService {
 
 		if (size == 0) {
 			// retourner un truc (le top : un throw avec un try catch dans le controler)
-			// avec un affichage de flash message ici ou au dessus.
+			throw(Exception)
 			
 		}
 		if(params?.offset){
