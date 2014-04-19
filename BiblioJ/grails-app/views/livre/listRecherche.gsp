@@ -48,8 +48,13 @@
 					
 						<td>${(livreInstance.get('livre')).typeDocument}</td>
 						
-						<td>${(livreInstance.get('livre')).auteurLivres.auteur}</td>
+						<g:set var="auteurLivreList" value="${(livreInstance.get('livre')).auteurLivres}" />
 						
+						<td>
+							<g:each in="${auteurLivreList}" status="j" var="auteurLivreInstance">
+								${fieldValue(bean: auteurLivreInstance, field: "auteur")}
+							</g:each>
+						</td>
 						
 						<g:if test="${session?.user}">
 							<g:each in="${session.panier}" var="count" >

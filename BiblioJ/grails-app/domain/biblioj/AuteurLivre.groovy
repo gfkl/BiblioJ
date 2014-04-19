@@ -17,7 +17,7 @@ class AuteurLivre {
 	
 	@Override
 	public String toString() {
-			return " [auteur=" + auteur + ", livre=" + livre+"]";
+			return " auteur=" + auteur + ", livre=" + livre+"";
 
 	}
 
