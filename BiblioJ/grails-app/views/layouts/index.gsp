@@ -41,7 +41,7 @@
 </div>
   <!--========<g:layoutBody />======================content================================-->
     	<div class="panier">
-    		<p>Le Panier !!!</p>
+    		<p>Votre panier :</p>
 			<g:panierUser/>
     	</div>
 
