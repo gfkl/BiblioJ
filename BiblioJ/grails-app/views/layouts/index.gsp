@@ -40,6 +40,10 @@
 	</div>
 </div>
   <!--========<g:layoutBody />======================content================================-->
+    	<div class="panier">
+    		<p>Le Panier !!!</p>
+			<g:panierUser/>
+    	</div>
 
 	   <div class="bg" >
 			<div class="bg-2">
@@ -49,7 +53,7 @@
 			            	
     						<g:link controller="auteur" action="list">
 	    						<strong class="number number-1">01.</strong>
-				                <span class="text-1">Auteur</span>
+				                <span class="text-1">Nos auteurs</span>
 				                <span class="link-1">Click Here</span>
 			                </g:link>
 			                
@@ -58,7 +62,7 @@
 			            	
     						<g:link controller="livre" action="list">
     							<strong class="number number-2">02.</strong>
-				                <span class="text-1">Livre</span>
+				                <span class="text-1">Nos livres</span>
 				                <span class="link-1">Click Here</span>
 			                </g:link>
 			            </div>
@@ -66,7 +70,7 @@
 			            	
     						<g:link controller="reservation" action="list">
     							<strong class="number number-3">03.</strong>
-				                <span class="text-1">Reservation</span>
+				                <span class="text-1">Vos réservations</span>
 				                <span class="link-1">Click Here</span>
 			                </g:link>
 			            </div>
@@ -74,7 +78,7 @@
 			            	
     						<g:link controller="livre" action="indexRecherche">
     							<strong class="number number-4">04.</strong>
-				                <span class="text-1">RechercheLivre</span>
+				                <span class="text-1">Rechercher un livre</span>
 				                <span class="link-1">Click Here</span>
 			                </g:link>
 			            </div>
@@ -83,7 +87,6 @@
 			</div>
 		</div>
 		<div class="footer" role="contentinfo">
-			<g:panierUser/>
 		</div>
 		<div id="spinner" class="spinner" style="display:none;"><g:message code="spinner.alt" default="Loading&hellip;"/></div>
 		<g:javascript library="application"/>

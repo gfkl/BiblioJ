@@ -198,6 +198,9 @@ dl.adrss dd a:hover {}
 /****************************footer************************/
 footer { width:100%; position:relative; overflow:hidden; text-align:center; padding:17px 0 20px 0; color:#fff;}
 
+/****************************panier************************/
+panier { width:20%; position:relative; }
+
 /**********************form**********************/
 .map {width:250px; height:164px; border:#fff 10px solid; background:#fff; margin-top:8px; }
 .map iframe {width:250px; height:164px; }

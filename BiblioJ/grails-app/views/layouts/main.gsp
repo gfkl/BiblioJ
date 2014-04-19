@@ -24,16 +24,23 @@
 	<body>
 
 
+
   <!--==============================header=================================-->
 <div id="header" class="bg">
 	<div class="bg-2">
 		<h1><a class="home" href="${createLink(uri: '/')}"><img src="${resource(dir: 'images', file: 'logo.png')}" alt="Grails" width="150" height="150"/></a></h1>
 	</div>
 </div>
+
+  <!--==============================panier=================================-->
+   	<div class="panier">
+    		<p>Le Panier !!!</p>
+			<g:panierUser/>
+    	</div>
+
   <!--========<g:layoutBody />======================content================================-->
 	<g:layoutBody />
 		<div class="footer" role="contentinfo">
-			<g:panierUser/>
 		</div>
 		<div id="spinner" class="spinner" style="display:none;"><g:message code="spinner.alt" default="Loading&hellip;"/></div>
 		<g:javascript library="application"/>
