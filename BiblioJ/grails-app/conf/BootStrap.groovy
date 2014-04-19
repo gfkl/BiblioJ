@@ -6,6 +6,8 @@ class BootStrap {
 		
 		loadDataService.openExelData();
 		
+		(new Membre(login:"a",mdp:"a",status:"client")).save()
+		
 		(new TypeDocument(intitule:"Aventure")).save()
 		(new TypeDocument(intitule:"Policier")).save()
 		(new TypeDocument(intitule:"Science-Fiction")).save()

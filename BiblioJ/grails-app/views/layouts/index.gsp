@@ -57,9 +57,9 @@
 	</div>
 	<!--========<g:layoutBody />======================content================================-->
 
-	<%--<g:if test="${session?.user}">		--%>
-	<div class="panier">
-		<t2>Mon panier : </t2>
+	<g:if test="${session?.user}">
+		<div class="panier">
+			<t2>Mon panier : </t2>
 			<ul>
 				<g:if test="${session?.user}">
 					<g:each in="${session.panier}" var="livreInstance">
@@ -122,12 +122,56 @@
 				</div>
 			</div>
 		</div>
-	<%--</g:if>
+	</g:if>
 	<g:else>
-		<div>
-			<p>Pas loggé !</p>
+
+
+
+
+		<div id="connection" class="content scaffold-create" role="main">
+			<h1>
+				<g:message code="Connection" args="Connection" />
+			</h1>
+			<g:if test="${flash.message}">
+				<div class="message" role="status">
+					${flash.message}
+				</div>
+			</g:if>
+			<g:hasErrors bean="${livreInstance}">
+				<ul class="errors" role="alert">
+					<g:eachError bean="${livreInstance}" var="error">
+						<li
+							<g:if test="${error in org.springframework.validation.FieldError}">data-field-id="${error.field}"</g:if>><g:message
+								error="${error}" /></li>
+					</g:eachError>
+				</ul>
+			</g:hasErrors>
+			<g:form action="connection" controller="membre">
+				<div
+					class="fieldcontain ${hasErrors(bean: membreInstance, field: 'login', 'error')} required">
+					<label for="login"> <g:message code="membre.login.label"
+							default="Login" /> <span class="required-indicator">*</span>
+					</label>
+					<g:textField name="login" required=""
+						value="${membreInstance?.login}" />
+				</div>
+
+				<div
+					class="fieldcontain ${hasErrors(bean: membreInstance, field: 'mdp', 'error')} required">
+					<label for="mdp"> <g:message code="membre.mdp.label"
+							default="Mdp" /> <span class="required-indicator">*</span>
+					</label>
+					<g:textField name="mdp" required="" value="${membreInstance?.mdp}" />
+
+					<fieldset class="buttons">
+						<g:submitButton name="connection" class="connection"
+							value="Connection" />
+					</fieldset>
+				</div>
+			</g:form>
 		</div>
-	</g:else>--%>
+
+	</g:else>
 	<div class="footer" role="contentinfo"></div>
 	<div id="spinner" class="spinner" style="display: none;">
 		<g:message code="spinner.alt" default="Loading&hellip;" />

@@ -9,7 +9,6 @@ class GestionPanierService {
 		def list = []
 
 		if (!user){
-			session["user"] = "Reservation"
 			list.add(livreInstance)
 			session["panier"] = list
 
