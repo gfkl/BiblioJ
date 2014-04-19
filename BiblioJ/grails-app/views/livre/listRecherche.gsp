@@ -26,11 +26,11 @@
 					
 						<g:sortableColumn property="titre" title="${message(code: 'livre.titre.label', default: 'Titre')}" />
 					
-						<g:sortableColumn property="nombreExemplaires" title="${message(code: 'livre.nombreExemplaires.label', default: 'Nombre Exemplaires')}" />
-					
 						<g:sortableColumn property="nombreExemplairesDisponibles" title="${message(code: 'livre.nombreExemplairesDisponibles.label', default: 'Nombre Exemplaires Disponibles')}" />
 					
 						<th><g:message code="livre.typeDocument.label" default="Type Document" /></th>
+						
+						<th><g:message default="Auteur"/></th>
 						
 						<th><g:message code="livre.typeDocument.label" default="Emprunter" /></th>
 						
@@ -44,13 +44,11 @@
 					
 						<td><g:link action="show" id="${(livreInstance.get('livre')).id}">${(livreInstance.get('livre')).titre}</g:link></td>
 					
-						<td>${(livreInstance.get('livre')).nombreExemplaires}</td>
-					
 						<td>${(livreInstance.get('livre')).nombreExemplairesDisponibles}</td>
 					
 						<td>${(livreInstance.get('livre')).typeDocument}</td>
 						
-						
+						<td>${(livreInstance.get('livre')).auteurLivres.auteur}</td>
 						
 						
 						<g:if test="${session?.user}">
