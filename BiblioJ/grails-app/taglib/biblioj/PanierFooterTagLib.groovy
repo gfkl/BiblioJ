@@ -10,7 +10,7 @@ class PanierFooterTagLib {
 		def list = session.panier
 		def strList = ""
 		list.each{ livre ->
-			strList = strList +"    "+livre
+			strList = strList + "<br\\>" + livre.toString()
 		}
 		strList
 	}
