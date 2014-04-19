@@ -9,7 +9,7 @@ class Auteur {
 		
     static constraints = {
 		nom nullable : false, blank : false
-		prenom nullable : false, blank : false
+		prenom nullable : true, blank : false
     }
 	
 	public String toString() {

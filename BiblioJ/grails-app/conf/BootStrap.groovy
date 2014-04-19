@@ -1,8 +1,10 @@
 import biblioj.*
 
 class BootStrap {
-
+	LoadDataService loadDataService
     def init = { servletContext ->
+		
+		loadDataService.openExelData();
 		
 		(new TypeDocument(intitule:"Aventure")).save()
 		(new TypeDocument(intitule:"Policier")).save()
