@@ -57,6 +57,7 @@
 	</div>
 	<!--========<g:layoutBody />======================content================================-->
 
+
 	<g:if test="${session?.user}">
 		<div class="panier">
 			<t2>Mon panier : </t2>
@@ -166,9 +167,17 @@
 					<fieldset class="buttons">
 						<g:submitButton name="connection" class="connection"
 							value="Connection" />
+						
+						<g:link controller="membre" action="indexInscription">
+							<input type="button" value="Inscrire" class="button" />
+						</g:link>
+					
 					</fieldset>
 				</div>
 			</g:form>
+
+
+
 		</div>
 
 	</g:else>
