@@ -14,7 +14,7 @@
 		<g:message code="livre.typeDocument.label" default="Type Document" />
 		
 	</label>
-	<g:select id="typeDocument" name="typeDocument.id" from="${biblioj.TypeDocument.list()}" optionKey="id" value="${livreInstance?.typeDocument?.id}" class="many-to-one" noSelection="['null': '']"/>
+	<g:select id="typeDocument" name="typeDocumentId" from="${biblioj.TypeDocument.list()}" optionKey="id" value="${livreInstance?.typeDocument?.id}" class="many-to-one" noSelection="['null': '']"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: auteurInstance, field: 'nom', 'error')} ">

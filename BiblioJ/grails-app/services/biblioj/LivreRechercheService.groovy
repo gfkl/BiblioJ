@@ -8,15 +8,14 @@ class LivreRechercheService extends Exception{
 		def findAuteur = false
 		def typeLivre = null
 		def map = []
-		println varParams
-		
+
 		try{
-			if(varParams.typeDocument != null || varParams.typeDocument.get('id') != null)
-				typeLivre = TypeDocument.get(varParams.typeDocument.get('id'))
+			if(varParams.typeDocumentId != null)
+				typeLivre = TypeDocument.get(varParams.typeDocumentId)
 		}catch(e) {
 			typeLivre = null
 		}
-		println typeLivre
+
 		livreInstance.each { curLivre ->
 			if(!varParams.titre.equals("")){
 				if(!(curLivre.titre.toLowerCase() ==~ ".*"+varParams.titre.toLowerCase()+".*"))
@@ -54,7 +53,7 @@ class LivreRechercheService extends Exception{
 		if (size == 0) {
 			// retourner un truc (le top : un throw avec un try catch dans le controler)
 			throw(Exception)
-			
+
 		}
 		if(params?.offset){
 			def place = params.offset.toInteger()
