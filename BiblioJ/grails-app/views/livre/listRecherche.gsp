@@ -51,9 +51,13 @@
 						<g:set var="auteurLivreList" value="${(livreInstance.get('livre')).auteurLivres}" />
 						
 						<td>
+							<ul>
 							<g:each in="${auteurLivreList}" status="j" var="auteurLivreInstance">
-								${fieldValue(bean: auteurLivreInstance, field: "auteur")}
+								<li>
+									${fieldValue(bean: auteurLivreInstance, field: "auteur")}
+								</li>
 							</g:each>
+							</ul>
 						</td>
 						
 						<g:if test="${session?.user}">
