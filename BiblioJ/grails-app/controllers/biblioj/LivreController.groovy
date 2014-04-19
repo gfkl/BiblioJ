@@ -43,7 +43,7 @@ class LivreController {
 		
 		if(params.currentController.equals("index"))
 			redirect(uri:'/')
-		else if(params.currentController.equals("list")){
+		else if(params.currentAction.equals("list")){
 			redirect(action:"list", offset:params.offset)
 		}else
 			redirect(controller: params.controller, action: params.currentAction, id:params.id)
