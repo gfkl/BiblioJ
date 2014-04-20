@@ -42,7 +42,7 @@ class ReservationService {
 		def resa = Reservation.findByCode(codeResa);
 		resa.reservationLivres.each { resaLivre ->
 			if (resaLivre.livre.equals(Livre.get(idLivre))) {
-				reservationLivres.delete()
+				reservationLivres.removeFromreservation(resa)
 			}
 		}
 		if (resa.reservationLivres.size() == 0)

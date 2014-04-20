@@ -20,9 +20,13 @@ class LivreController {
 	}
 	
 	def rendreLivre(){
-		println params
 		reservationService.rendreLivre(params.code, params.id)
-		redirect(controller:"reservation", action:"list")
+		redirect(uri:'/')
+	}
+	
+	def rendreLivreAll(){
+		reservationService.supprimerReservation(params.code)
+		redirect(uri:'/')
 	}
 	
 	def recherche(){

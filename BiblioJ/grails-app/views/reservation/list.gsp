@@ -66,6 +66,11 @@
 									</li>
 
 								</g:each>
+								<li><g:link controller="livre"
+											action="rendreLivreAll"
+											params="[code: reservationInstance.code]">
+											<input name="rendre" class="button" type="button" value="Rendre tous les livres" />
+										</g:link></li>
 							</ul></td>
 					</tr>
 				</g:each>
