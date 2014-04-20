@@ -20,32 +20,14 @@ class ReservationService {
 			varSession["panier"].remove(Livre.findByTitre(titreLivre))
 		}
 		/* validation du panier */
-//		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-//		Date date = new Date();
-//		System.out.println(dateFormat.format(date));
-		def dateResa = new Date().format("yyyy-MM-dd HH:mm:ss")
-		println varSession["user"]
+		def dateResa = new Date()
 		def membre = Membre.findByLogin(varSession["user"])
-		println "#" + membre.login
-		def code = dateResa.toString() + membre.login
-		println "##" + code
-		def resa = new Reservation(code: code, reservation: new Date(), membre: membre).save(flush : true)
-		println "###" + resa
-		def resa2 = Reservation.findByCode(code)
-		println "####" + resa2
+		def code = dateResa.format("yyyy-MM-dd HH:mm:ss") + membre.login
+		def resa = new Reservation(code: code, reservation: dateResa, membre: membre).save(flush : true)
 		varSession["panier"].each { livre ->
-//			def livre = Livre.findByTitre(titreLivre)
-			println "---->" + livre.titre
 			livre.nombreExemplairesDisponibles--
-			def aaa = new ReservationLivre(reservation: resa, livre: livre).save(flush: true)
-			println aaa
+			new ReservationLivre(reservation: resa, livre: livre).save(flush: true)
 		}
-		listLivreNonDisponible.each {
-			println "-->" + it
-		}
-		println varSession["panier"]
-		println Reservation.list()
-		
 	}
 	
 	def supprimerReservation(def code) {
