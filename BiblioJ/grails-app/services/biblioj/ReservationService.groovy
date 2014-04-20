@@ -23,7 +23,7 @@ class ReservationService {
 		def membre = Membre().findByLogin(varSession["user"])
 		def code = dateResa.toString() + membre.login
 		def resa =  new Reservation(code: code, reservation: dateResa, membre: membre).save()
-		session.panier.each { titreLivre ->
+		varSession["panier"].each { titreLivre ->
 			def livre = Livre().findByTitre(titreLivre)
 			livre.nombreExemplairesDisponibles--
 			new ReservationLivre(reservation: resa, livre: livre).save()
