@@ -44,7 +44,7 @@ class ReservationLivreController {
 				strFlashMsg += curLivre
 			}
 			flash.message = strFlashMsg
-			redirect(action:"validerPanier")
+			redirect(controller:"Reservation",action:"validerPanier")
 
 		}else{
 			reservationService.validerReservation(session)
