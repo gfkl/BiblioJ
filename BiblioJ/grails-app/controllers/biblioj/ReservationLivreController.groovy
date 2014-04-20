@@ -46,8 +46,8 @@ class ReservationLivreController {
 			redirect(controller:"Reservation",action:"validerPanier")
 
 		}else{
-			reservationService.validerReservation(session)
-			flash.message = "Reservation validé"
+			def reserv = reservationService.validerReservation(session)
+			flash.message = "Reservation validé, Code Reservation "+reserv.code+", date limite :"+reserv.reservation
 			redirect(uri:'/')
 		}
 	}
