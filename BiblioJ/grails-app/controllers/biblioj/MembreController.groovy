@@ -10,6 +10,11 @@ class MembreController {
 		redirect(action: "list", params: params)
 	}
 
+	def deconnexion(){
+		session.invalidate()
+		redirect(uri:'/')
+	}
+	
 	def indexInscription(){
 		redirect(controller:"Membre" ,action: "inscription")
 	}

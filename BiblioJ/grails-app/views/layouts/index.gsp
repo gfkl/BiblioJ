@@ -61,7 +61,10 @@
 	<g:if test="${session?.user}">
 		<div>
 			Bonjour
-			${session.user}<br /> Déconnexion
+			${session.user}<br /> 
+			<g:link controller="membre" action="deconnexion">
+				<input type="button" value="Déconnexion" class="button" />
+			</g:link>
 		</div>
 		<div class="panier">
 			<t2>Mon panier : </t2>
