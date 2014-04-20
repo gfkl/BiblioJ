@@ -31,6 +31,7 @@ class ReservationService {
 			new ReservationLivre(reservation: resa, livre: livre).save(flush: true)
 		}
 		varSession["panier"] = []
+		resa
 	}
 	
 	def supprimerReservation(def code) {
