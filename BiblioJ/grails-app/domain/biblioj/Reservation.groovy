@@ -5,6 +5,7 @@ class Reservation {
 	String	code
 	Date	reservation
 	Membre	membre
+	Boolean receptionnee
 	
 	static mapping = {
 		membre lazy : false
@@ -16,5 +17,6 @@ class Reservation {
 		code nullable : false
 		reservation nullable : false
 		membre nullable : false
+		receptionnee nullable : false
     }
 }

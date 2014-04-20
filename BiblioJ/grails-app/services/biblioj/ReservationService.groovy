@@ -25,7 +25,7 @@ class ReservationService {
 		def dateResa = new Date()
 		def membre = Membre.findByLogin(varSession["user"])
 		def code = dateResa.format("yyyy-MM-dd HH:mm:ss") + membre.login
-		def resa = new Reservation(code: code, reservation: dateResa, membre: membre).save(flush : true)
+		def resa = new Reservation(code: code, reservation: dateResa, membre: membre, receptionnee:false).save(flush : true)
 		varSession["panier"].each { livre ->
 			Livre.findById(livre.id).nombreExemplairesDisponibles--
 			new ReservationLivre(reservation: resa, livre: livre).save(flush: true)
@@ -62,5 +62,11 @@ class ReservationService {
 				supprimerReservation(resa.code)
 			}
 		}
+	}
+	
+	def reserverCommande(def code){
+		def reserv = Reservation.findByCode(params.code)
+		reserv.receptionnee = true
+		reserv.save()
 	}
 }

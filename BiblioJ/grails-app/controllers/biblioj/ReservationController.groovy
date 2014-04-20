@@ -4,13 +4,21 @@ import org.springframework.dao.DataIntegrityViolationException
 
 class ReservationController {
 
+	ReservationService reservationService
+	
 	static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
 	def index() {
 		redirect(action: "list", params: params)
 	}
 
+	def receptionValider(){
+		reservationService.reserverCommande(params.code)
+		redirect(action:"list")
+	}
+	
 	def list(Integer max) {
+		reservationService.expirationReservation()
 		params.max = Math.min(max ?: 10, 100)
 		[reservationInstanceList: Reservation.list(params), reservationInstanceTotal: Reservation.count()]
 	}

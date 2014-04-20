@@ -60,17 +60,24 @@
 										${reserLivre.livre.titre} <g:link controller="livre"
 											action="rendreLivre" id="${reserLivre.livre.id}"
 											params="[code: reservationInstance.code]">
-											<input name="rendre" class="button" type="button" value="Rendre livre" />
+											<input name="rendre" class="button" type="button"
+												value="Rendre livre" />
 										</g:link>
 
 									</li>
 
 								</g:each>
-								<li><g:link controller="livre"
-											action="rendreLivreAll"
+								<li><g:link controller="livre" action="rendreLivreAll"
+										params="[code: reservationInstance.code]">
+										<input name="rendre" class="button" type="button"
+											value="Rendre tous les livres" />
+									</g:link> <g:if test="${reserLivre?.reservation?.receptionnee}">
+										<g:link controller="reception" action="receptionValider"
 											params="[code: reservationInstance.code]">
-											<input name="rendre" class="button" type="button" value="Rendre tous les livres" />
-										</g:link></li>
+											<input name="Receptionnée" class="button" type="button"
+												value="Receptionnée" />
+										</g:link>
+									</g:if></li>
 							</ul></td>
 					</tr>
 				</g:each>
