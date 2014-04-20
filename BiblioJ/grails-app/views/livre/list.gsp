@@ -53,7 +53,7 @@
 						
 						<g:if test="${session?.user}">
 							<g:each in="${session.panier}" var="count" >
-								<g:if test="${(fieldValue(bean: livreInstance, field:'titre').toString()).equals(count.titre.toString())}">
+								<g:if test="${(livreInstance.titre).toString().equals((count.titre).toString())}">
 									<td><g:link action="removePanier" id="${livreInstance.id}" params="[currentController: params.controller, currentAction: 'list', offset: params.offset]"> 
 										<input type="button" value="Retirer" class="button"/></g:link></td>
 								
