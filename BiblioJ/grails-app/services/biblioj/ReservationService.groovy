@@ -39,14 +39,14 @@ class ReservationService {
 		resa.delete()
 	}
 	
-	def rendreLivre(def codeResa, def titreLivre) {
+	def rendreLivre(def codeResa, def idLivre) {
 		def resa = Reservation.findByCode(codeResa);
-		resa.reservationLivres { resaLivre ->
-			if (resaLivre.livre.titre.equals(titreLivre)) {
-				resaLivre.delete()
+		resa.reservationLivres.each { resaLivre ->
+			if (resaLivre.livre.equals(Livre.get(idLivre))) {
+				reservationLivres.delete()
 			}
 		}
-		if (resa.reservationLivres.list().size == 0)
+		if (resa.reservationLivres.size() == 0)
 			resa.delete()
 	}
 }
