@@ -80,7 +80,9 @@ class LivreController {
 			println typeVar
 
 			redirect(action:"listRecherche", params:[offset:params.offset, titre:titreVar, auteur:auteurVar, typeDocumentId:typeVar])
-		}else
+		}else if(params.currentAction.equals("validerPanier"))
+			redirect(controller: params.currentController, action: params.currentAction,  params:[offset:params.offset])
+		else
 			redirect(controller: params.controller, action: params.currentAction, id:params.id)
 	}
 
