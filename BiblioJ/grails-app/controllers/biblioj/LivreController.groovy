@@ -18,6 +18,9 @@ class LivreController {
 	def indexRecherche(){
 		redirect(controller:"Livre" ,action: "recherche")
 	}
+	
+	def recherche(){
+	}
 
 	def list(Integer max) {
 		println params
@@ -56,8 +59,6 @@ class LivreController {
 
 	}
 
-	def recherche(){
-	}
 
 	def removePanier(){
 		gestionPanierService.removePanier(params, session)

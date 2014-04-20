@@ -56,7 +56,7 @@
 		</div>
 	</div>
 	<!--========<g:layoutBody />======================content================================-->
-
+	<g:set var="panierValeur" value="${0}" />
 
 	<g:if test="${session?.user}">
 		<div>
@@ -68,7 +68,9 @@
 			<ul>
 				<g:if test="${session?.user}">
 					<g:each in="${session.panier}" var="livreInstance">
-						<li><g:link controller="livre" action="removePanier"
+
+						<li><g:set var="panierValeur" value="${1}" /> <g:link
+								controller="livre" action="removePanier"
 								id="${livreInstance.id}" params="[currentController: 'index']">
 								${fieldValue(bean: livreInstance, field: "titre")}
 								<img
@@ -76,11 +78,14 @@
 									width="10" height="10" />
 							</g:link></li>
 					</g:each>
-					<fieldset class="buttons">
+
+
+					<g:if test="${panierValeur == 1}">
+
 						<g:link controller="reservation" action="validerPanier">
 							<input type="button" value="Valider le panier" class="button" />
 						</g:link>
-					</fieldset>
+					</g:if>
 
 				</g:if>
 				<g:else>
@@ -89,6 +94,9 @@
 
 			</ul>
 		</div>
+
+		<!--========<g:layoutBody />======================finPanier================================-->
+
 
 		<div class="bg">
 			<div class="bg-2">
