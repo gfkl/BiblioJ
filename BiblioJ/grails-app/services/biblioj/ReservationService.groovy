@@ -70,7 +70,7 @@ class ReservationService {
 	}
 	
 	def reserverCommande(def code){
-		def reserv = Reservation.findByCode(params.code)
+		def reserv = Reservation.findByCode(code)
 		reserv.receptionnee = true
 		reserv.save()
 	}
