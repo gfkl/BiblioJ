@@ -2,7 +2,7 @@ package biblioj
 
 class ReservationService {
 
-    def verrifierDiponnibilité() {
+    def verrifierDiponnibilite() {
 		def listLivreNonDisponible = []
 		session.panier.each { livre ->
 			if (livre.getNombreExemplairesDisponibles() == 0) {
@@ -14,7 +14,7 @@ class ReservationService {
 	
 	def validerReservation() {
 		/* suppression des livres non dispo du panier */
-		listLivreNonDisponible = verrifierDiponnibilité()
+		listLivreNonDisponible = verrifierDiponnibilite()
 		listLivreNonDisponible.each { titreLivre ->
 			session.panier.remove(titreLivre)
 		}
@@ -24,7 +24,9 @@ class ReservationService {
 		def code = dateResa.toString() + membre.login
 		def resa =  new Reservation(code: code, reservation: dateResa, membre: membre).save()
 		session.panier.each { titreLivre ->
-			new ReservationLivre(reservation: resa, livre: Livre().findByTitre(livre)).save()
+			def livre = Livre().findByTitre(titreLivre)
+			livre.nombreExemplairesDisponibles--
+			new ReservationLivre(reservation: resa, livre: livre).save()
 		}
 	}
 	
