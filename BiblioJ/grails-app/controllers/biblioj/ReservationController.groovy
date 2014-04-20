@@ -101,8 +101,8 @@ class ReservationController {
 	}
 
 	def validerPanier(Integer max) {
-		def myOffset = 1
-		params.max = Math.min(max ?: 2,2)
+		def myOffset = 9
+		params.max = Math.min(max ?: 10,10)
 		def size = session["panier"].size()
 		def listRet = []
 		def sessionPanier = session["panier"]

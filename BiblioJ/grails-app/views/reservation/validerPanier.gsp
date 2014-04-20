@@ -77,8 +77,7 @@
 			<g:link controller="reservationLivre" action="validerReservation">
 
 				<input name="valider reservation" class="save"
-					value="valider reservation"
-					params="[confirmation:params.confirmation]" />
+					value="valider reservation" />
 			</g:link>
 		</fieldset>
 	</div>

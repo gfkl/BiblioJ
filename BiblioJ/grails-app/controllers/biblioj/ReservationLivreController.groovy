@@ -38,13 +38,13 @@ class ReservationLivreController {
 	def validerReservation(){
 		def list = reservationService.verrifierDiponnibilite(session)
 		println params
-		if(list && params.confirmation == 0){
+		if(list){
 			def strFlashMsg = "Les livres suivant ne sont pas disponible: "
 			list.each {curLivre ->
 				strFlashMsg += curLivre
 			}
 			flash.message = strFlashMsg
-			redirect(action:"validerPanier", params:[confirmation:1])
+			redirect(action:"validerPanier")
 
 		}else{
 			reservationService.validerReservation(session)
