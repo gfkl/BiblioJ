@@ -13,6 +13,11 @@ class LoadDataService extends Exception{
 			def auteur = fields[4]
 			def randomTotal = Math.abs(new Random().nextInt() % 10 + 1)
 			def randomDispo = Math.abs(new Random().nextInt() % 10 + randomTotal)
+			int min = 0;
+			int max = 10;
+			randomDispo = min + Math.random() * (max - min)
+			randomTotal = randomDispo + Math.random() * (max - randomDispo)
+			
 			
 			if(!(TypeDocument.findByIntitule(type)))
 				(new TypeDocument(intitule:type)).save()
