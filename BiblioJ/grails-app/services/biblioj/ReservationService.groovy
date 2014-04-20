@@ -2,9 +2,9 @@ package biblioj
 
 class ReservationService {
 
-    def verrifierDiponnibilite() {
+    def verrifierDiponnibilite(def varSession) {
 		def listLivreNonDisponible = []
-		session.panier.each { livre ->
+		varSession["panier"].each { livre ->
 			if (livre.getNombreExemplairesDisponibles() == 0) {
 				listLivreNonDisponible.add(livre.getTitre())
 			}
@@ -12,15 +12,15 @@ class ReservationService {
 		return listLivreNonDisponible
 	}
 	
-	def validerReservation() {
+	def validerReservation(def varSession) {
 		/* suppression des livres non dispo du panier */
-		listLivreNonDisponible = verrifierDiponnibilite()
+		def listLivreNonDisponible = verrifierDiponnibilite(varSession)
 		listLivreNonDisponible.each { titreLivre ->
-			session.panier.remove(titreLivre)
+			varSession["panier"].remove(titreLivre)
 		}
 		/* validation du panier */
 		def dateResa = new Date("yyyy-MM-dd hh:mm:ss")
-		def membre = Membre().findByLogin(session.user)
+		def membre = Membre().findByLogin(varSession["user"])
 		def code = dateResa.toString() + membre.login
 		def resa =  new Reservation(code: code, reservation: dateResa, membre: membre).save()
 		session.panier.each { titreLivre ->
