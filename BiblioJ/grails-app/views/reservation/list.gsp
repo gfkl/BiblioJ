@@ -71,8 +71,8 @@
 										params="[code: reservationInstance.code]">
 										<input name="rendre" class="button" type="button"
 											value="Rendre tous les livres" />
-									</g:link> <g:if test="${reserLivre?.reservation?.receptionnee}">
-										<g:link controller="reception" action="receptionValider"
+									</g:link> <g:if test="${(reservationInstance.receptionnee) == false}">
+										<g:link controller="reservation" action="receptionValider"
 											params="[code: reservationInstance.code]">
 											<input name="Receptionnée" class="button" type="button"
 												value="Receptionnée" />

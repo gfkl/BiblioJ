@@ -1,6 +1,8 @@
 package biblioj
 
 import org.springframework.dao.DataIntegrityViolationException
+import groovy.time.TimeCategory
+
 
 class ReservationLivreController {
 
@@ -33,7 +35,7 @@ class ReservationLivreController {
 
 	def validerPanier(){
 	}
-	
+
 
 	def validerReservation(){
 		def list = reservationService.verrifierDiponnibilite(session)
@@ -47,7 +49,12 @@ class ReservationLivreController {
 
 		}else{
 			def reserv = reservationService.validerReservation(session)
-			flash.message = "Reservation validé, Code Reservation "+reserv.code+", date limite :"+reserv.reservation
+			Date temp = reserv.reservation
+			use (TimeCategory) {
+				temp = temp + 24.hour
+			}
+
+			flash.message = "Reservation validé, Code Reservation "+reserv.code+", date limite :"+temp
 			redirect(uri:'/')
 		}
 	}
