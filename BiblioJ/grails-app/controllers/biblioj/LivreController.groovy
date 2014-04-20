@@ -7,7 +7,7 @@ class LivreController {
 
 	GestionPanierService gestionPanierService
 	LivreRechercheService livreRechercheService
-
+	ReservationService reservationService
 
 	static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
@@ -17,6 +17,12 @@ class LivreController {
 
 	def indexRecherche(){
 		redirect(controller:"Livre" ,action: "recherche")
+	}
+	
+	def rendreLivre(){
+		println params
+		reservationService.rendreLivre(params.code, params.id)
+		redirect(controller:"reservation", action:"list")
 	}
 	
 	def recherche(){

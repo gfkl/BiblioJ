@@ -75,7 +75,7 @@
 
 		<fieldset class="buttons">
 			<g:link controller="reservationLivre" action="validerReservation">
-				<input name="valider reservation" class="save"
+				<input name="valider reservation" class="button" type="button"
 					value="valider reservation" />
 			</g:link>
 		</fieldset>
