@@ -59,7 +59,8 @@
 							${(livreInstance.typeDocument)}
 						</td>
 
-						<td><g:link controller="Livre" action="removePanier" id="${(livreInstance.id)}"
+						<td><g:link controller="Livre" action="removePanier"
+								id="${(livreInstance.id)}"
 								params="[currentController: 'reservation', currentAction: 'validerPanier', offset: params.offset]">
 								<input type="button" value="Remove" class="button" />
 							</g:link></td>
@@ -72,13 +73,13 @@
 		<div class="pagination">
 			<g:paginate total="${livreInstanceTotal}" params="${params}" />
 		</div>
+		${params?.test}
 
 		<fieldset class="buttons">
-			<g:link controller="reservationLivre" action="validerReservation">
+			<g:link controller="reservationLivre" action="validerReservation" params="[test:params.test]">
 				<input name="valider reservation" class="button" type="button"
 					value="valider reservation" />
 			</g:link>
-		</fieldset>
 	</div>
 </body>
 </html>
