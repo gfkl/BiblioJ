@@ -32,7 +32,7 @@ class ReservationService {
 	
 	def supprimerReservation(def code) {
 		def resa = Reservation.findByCode(code);
-		resa.reservationLivres.each { resaLivre ->
+		resa.reservationLivres.each { resaLivre
 			resaLivre.delete()
 		}
 		resa.delete()
@@ -40,7 +40,7 @@ class ReservationService {
 	
 	def rendreLivre(def codeResa, def titreLivre) {
 		def resa = Reservation.findByCode(codeResa);
-		resa.reservationLivres { resaLivre
+		resa.reservationLivres { resaLivre ->
 			if (resaLivre.livre.titre.equals(titreLivre)) {
 				resaLivre.delete()
 			}
