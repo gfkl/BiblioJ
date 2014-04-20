@@ -50,8 +50,8 @@
 
 	<!--==============================panier=================================-->
 	<div>
-		Bonjour ${session.user}<br/>
-		Déconnexion
+		Bonjour
+		${session.user}<br /> Déconnexion
 	</div>
 	<div class="panier">
 		<t2>Mon panier : </t2>
@@ -67,6 +67,12 @@
 								width="10" height="10" />
 						</g:link></li>
 				</g:each>
+				<fieldset class="buttons">
+					<g:link controller="reservation" action="validerPanier">
+						<input type="button" value="Valider le panier" class="button" />
+					</g:link>
+					
+				</fieldset>
 			</g:if>
 			<g:else>
 				<li>Vide</li>

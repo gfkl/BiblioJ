@@ -99,4 +99,8 @@ class ReservationController {
             redirect(action: "show", id: id)
         }
     }
+	
+	def validerPanier() {
+		// faire une vue du panier a valider 
+	}
 }
