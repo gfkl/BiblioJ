@@ -24,7 +24,7 @@ class ReservationService {
 		/* validation du panier */
 		def dateResa = new Date()
 		def membre = Membre.findByLogin(varSession["user"])
-		def code = dateResa.format("yyyy-MM-dd HH:mm:ss") + membre.login
+		def code = dateResa.format("yyyyMMddHHmmss") + membre.login
 		def resa = new Reservation(code: code, reservation: dateResa, membre: membre, receptionnee:false).save(flush : true)
 		varSession["panier"].each { livre ->
 			Livre.findById(livre.id).nombreExemplairesDisponibles--
