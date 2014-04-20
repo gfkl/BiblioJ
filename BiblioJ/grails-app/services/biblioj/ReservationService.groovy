@@ -29,7 +29,7 @@ class ReservationService {
 		println "#" + membre.login
 		def code = dateResa.toString() + membre.login
 		println "##" + code
-		def resa = new Reservation(code: code, reservation: dateResa, membre: membre).save(flush : true)
+		def resa = new Reservation(code: code, reservation: new Date(), membre: membre).save(flush : true)
 		println "###" + resa
 		def resa2 = Reservation.findByCode(code)
 		println "####" + resa2
