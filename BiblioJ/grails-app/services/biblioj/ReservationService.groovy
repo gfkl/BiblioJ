@@ -1,5 +1,7 @@
 package biblioj
 
+import groovy.time.TimeCategory
+
 class ReservationService {
 
     def verrifierDiponnibilite(def varSession) {
@@ -32,21 +34,33 @@ class ReservationService {
 	}
 	
 	def supprimerReservation(def code) {
-		def resa = Reservation.findByCode(code);
-		resa.reservationLivres.each { resaLivre ->
-			resaLivre.delete()
+		def resa = Reservation.findByCode(code)
+		def reservationLivres = ReservationLivre.findAllByReservation(resa)
+		reservationLivres.each { resaLivre ->
+			rendreLivre(code, resaLivre.livre.id)
 		}
-		resa.delete()
 	}
 	
 	def rendreLivre(def codeResa, def idLivre) {
-		def resa = Reservation.findByCode(codeResa);
-		resa.reservationLivres.each { resaLivre ->
-			if (resaLivre.livre.equals(Livre.get(idLivre))) {
-				reservationLivres.removeFromreservation(resa)
-			}
-		}
+		def resa = Reservation.findByCode(codeResa)
+		def livre = Livre.findById(idLivre)
+		def resaLivre = ReservationLivre.findByReservationAndLivre(resa, livre)
+		resa.reservationLivres.remove(resaLivre)
+		livre.reservationLivres.remove(resaLivre)
+		livre.nombreExemplairesDisponibles++
+		resaLivre.delete()
 		if (resa.reservationLivres.size() == 0)
 			resa.delete()
+	}
+	
+	def expirationReservation() {
+		def current = new Date()
+		Reservation.each { resa ->
+			Date temp = resa.reservation
+			temp.add(Calendar.MINUTE,1)
+			if (temp < current) {
+				supprimerReservation(resa.code)
+			}
+		}
 	}
 }
