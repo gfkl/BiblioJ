@@ -33,7 +33,6 @@ class LivreController {
 	}
 
 	def list(Integer max) {
-		println params
 		params.max = Math.min(max ?: 10, 100)
 		[livreInstanceList: Livre.list(params), livreInstanceTotal: Livre.count()]
 	}
@@ -60,7 +59,6 @@ class LivreController {
 			def typeVar = params.typeDocumentId
 			if(typeVar == null)
 				typeVar = ""
-			println typeVar
 
 			redirect(action:"listRecherche", params:[offset:params.offset, titre:titreVar, auteur:auteurVar, typeDocumentId:typeVar])
 		}else
@@ -87,7 +85,6 @@ class LivreController {
 			def typeVar = params.typeDocumentId
 			if(typeVar == null)
 				typeVar = ""
-			println typeVar
 
 			redirect(action:"listRecherche", params:[offset:params.offset, titre:titreVar, auteur:auteurVar, typeDocumentId:typeVar])
 		}else if(params.currentAction.equals("validerPanier"))
