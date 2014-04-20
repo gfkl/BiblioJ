@@ -55,11 +55,13 @@ class ReservationService {
 	
 	def expirationReservation() {
 		def current = new Date()
-		Reservation.each { resa ->
-			Date temp = resa.reservation
-			temp.add(Calendar.MINUTE,1)
-			if (temp < current) {
-				supprimerReservation(resa.code)
+		Reservation.list().each { resa ->
+			if (resa.receptionnee == 0) {
+				Date temp = resa.reservation
+				temp.add(Calendar.MINUTE,1)
+				if (temp < current) {
+					supprimerReservation(resa.code)
+				}
 			}
 		}
 	}
