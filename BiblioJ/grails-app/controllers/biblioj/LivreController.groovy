@@ -18,22 +18,21 @@ class LivreController {
 	def indexRecherche(){
 		redirect(controller:"Livre" ,action: "recherche")
 	}
-	
+
 	def rendreLivre(){
 		reservationService.rendreLivre(params.code, params.id)
 		redirect(uri:'/')
 	}
-	
+
 	def rendreLivreAll(){
 		reservationService.supprimerReservation(params.code)
 		redirect(uri:'/')
 	}
-	
+
 	def recherche(){
 	}
 
 	def list(Integer max) {
-		println params
 		params.max = Math.min(max ?: 10, 100)
 		[livreInstanceList: Livre.list(params), livreInstanceTotal: Livre.count()]
 	}
@@ -60,7 +59,6 @@ class LivreController {
 			def typeVar = params.typeDocumentId
 			if(typeVar == null)
 				typeVar = ""
-			println typeVar
 
 			redirect(action:"listRecherche", params:[offset:params.offset, titre:titreVar, auteur:auteurVar, typeDocumentId:typeVar])
 		}else
@@ -87,12 +85,15 @@ class LivreController {
 			def typeVar = params.typeDocumentId
 			if(typeVar == null)
 				typeVar = ""
-			println typeVar
 
 			redirect(action:"listRecherche", params:[offset:params.offset, titre:titreVar, auteur:auteurVar, typeDocumentId:typeVar])
-		}else if(params.currentAction.equals("validerPanier"))
-			redirect(controller: params.currentController, action: params.currentAction,  params:[offset:params.offset])
-		else
+		}else if(params.currentAction.equals("validerPanier")){
+			if(session["panier"].size() == 0){
+				flash.message = "Pannier vide"
+				redirect(uri:'/')
+			}else
+				redirect(controller: params.currentController, action: params.currentAction,  params:[offset:params.offset])
+		}else
 			redirect(controller: params.controller, action: params.currentAction, id:params.id)
 	}
 

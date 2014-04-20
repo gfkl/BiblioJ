@@ -61,7 +61,7 @@
 	<g:if test="${session?.user}">
 		<div>
 			Bonjour
-			${session.user}<br /> 
+			${session.user}<br />
 			<g:link controller="membre" action="deconnexion">
 				<input type="button" value="Déconnexion" class="button" />
 			</g:link>
@@ -102,6 +102,12 @@
 
 
 		<div class="bg">
+
+			<g:if test="${flash.message}">
+				<div class="message" role="status">
+					${flash.message}
+				</div>
+			</g:if>
 			<div class="bg-2">
 				<div id="content">
 					<div class="ic">More Website Templates @ TemplateMonster.com.
