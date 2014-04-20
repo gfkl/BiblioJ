@@ -5,7 +5,7 @@ class ReservationService {
     def verrifierDiponnibilite(def varSession) {
 		def listLivreNonDisponible = []
 		varSession["panier"].each { livre ->
-			if (livre.getNombreExemplairesDisponibles() == 0) {
+			if (Livre.findById(livre.id).nombreExemplairesDisponibles == 0) {
 				listLivreNonDisponible.add(livre.getTitre())
 			}
 		}
@@ -25,9 +25,10 @@ class ReservationService {
 		def code = dateResa.format("yyyy-MM-dd HH:mm:ss") + membre.login
 		def resa = new Reservation(code: code, reservation: dateResa, membre: membre).save(flush : true)
 		varSession["panier"].each { livre ->
-			livre.nombreExemplairesDisponibles--
+			Livre.findById(livre.id).nombreExemplairesDisponibles--
 			new ReservationLivre(reservation: resa, livre: livre).save(flush: true)
 		}
+		varSession["panier"] = []
 	}
 	
 	def supprimerReservation(def code) {
