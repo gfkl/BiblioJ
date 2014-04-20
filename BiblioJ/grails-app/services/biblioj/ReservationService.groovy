@@ -16,23 +16,41 @@ class ReservationService {
 		/* suppression des livres non dispo du panier */
 		def listLivreNonDisponible = verrifierDiponnibilite(varSession)
 		listLivreNonDisponible.each { titreLivre ->
-			varSession["panier"].remove(titreLivre)
+			println "-> " + titreLivre
+			varSession["panier"].remove(Livre.findByTitre(titreLivre))
 		}
 		/* validation du panier */
-		def dateResa = new Date("yyyy-MM-dd hh:mm:ss")
-		def membre = Membre().findByLogin(varSession["user"])
+//		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+//		Date date = new Date();
+//		System.out.println(dateFormat.format(date));
+		def dateResa = new Date().format("yyyy-MM-dd HH:mm:ss")
+		println varSession["user"]
+		def membre = Membre.findByLogin(varSession["user"])
+		println "#" + membre.login
 		def code = dateResa.toString() + membre.login
-		def resa =  new Reservation(code: code, reservation: dateResa, membre: membre).save()
-		varSession["panier"].each { titreLivre ->
-			def livre = Livre().findByTitre(titreLivre)
+		println "##" + code
+		def resa = new Reservation(code: code, reservation: dateResa, membre: membre).save(flush : true)
+		println "###" + resa
+		def resa2 = Reservation.findByCode(code)
+		println "####" + resa2
+		varSession["panier"].each { livre ->
+//			def livre = Livre.findByTitre(titreLivre)
+			println "---->" + livre.titre
 			livre.nombreExemplairesDisponibles--
-			new ReservationLivre(reservation: resa, livre: livre).save()
+			def aaa = new ReservationLivre(reservation: resa, livre: livre).save(flush: true)
+			println aaa
 		}
+		listLivreNonDisponible.each {
+			println "-->" + it
+		}
+		println varSession["panier"]
+		println Reservation.list()
+		
 	}
 	
 	def supprimerReservation(def code) {
 		def resa = Reservation.findByCode(code);
-		resa.reservationLivres.each { resaLivre
+		resa.reservationLivres.each { resaLivre ->
 			resaLivre.delete()
 		}
 		resa.delete()
