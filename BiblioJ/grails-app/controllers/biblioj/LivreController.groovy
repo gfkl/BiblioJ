@@ -26,7 +26,7 @@ class LivreController {
 
 	def rendreLivreAll(){
 		reservationService.supprimerReservation(params.code)
-		redirect(uri:'/')
+		redirect(controller:"reservation", action:"list")
 	}
 
 	def recherche(){

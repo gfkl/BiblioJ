@@ -39,8 +39,13 @@ class ReservationLivreController {
 
 	def validerReservation(){
 		def list = reservationService.verrifierDiponnibilite(session)
-		
-		if(list && (!(params.test.equals("second")))){
+		if(list.size() == session["panier"].size()){
+			flash.message = "La commande ne peut pas être validé car tous les livres sont emprunter"
+			redirect(uri:'/')
+		}else if(session["panier"].size() == 0){
+			flash.message = "La commande ne peut pas être validé car votre pannier est vide"
+			redirect(uri:'/')
+		}else if(list && (!(params.test.equals("second")))){
 			def strFlashMsg = "Les livres suivant ne sont pas disponible: "
 			list.each {curLivre ->
 				strFlashMsg += curLivre
