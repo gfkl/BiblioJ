@@ -196,7 +196,7 @@
 							value="Connection" />
 
 						<g:link controller="membre" action="indexInscription">
-							<input type="button" value="Inscrire" class="button" />
+							<input type="button" value="S'inscrire" class="button" />
 						</g:link>
 
 					</fieldset>

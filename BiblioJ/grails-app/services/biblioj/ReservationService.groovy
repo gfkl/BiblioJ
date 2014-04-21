@@ -26,7 +26,6 @@ class ReservationService {
 			listLivre.add(livre)
 			println "--->" + listLivre
 		}
-		
 		varSession.panier.removeAll(listLivre)
 		println "#" + varSession["panier"]
 		/* validation du panier */

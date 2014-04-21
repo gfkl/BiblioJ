@@ -73,7 +73,6 @@
 		<div class="pagination">
 			<g:paginate total="${livreInstanceTotal}" params="${params}" />
 		</div>
-		${params?.test}
 
 		<fieldset class="buttons">
 			<g:link controller="reservationLivre" action="validerReservation" params="[test:params.test]">
