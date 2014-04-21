@@ -19,7 +19,10 @@ class ReservationService {
 		def listLivreNonDisponible = verrifierDiponnibilite(varSession)
 		listLivreNonDisponible.each { titreLivre ->
 			println "-> " + titreLivre
-			varSession["panier"].remove(Livre.findByTitre(titreLivre))
+			def livre = Livre.findByTitre(titreLivre)
+			println "--> " + livre.titre
+			varSession["panier"].remove(livre.titre)
+			println varSession["panier"]
 		}
 		/* validation du panier */
 		def dateResa = new Date()
