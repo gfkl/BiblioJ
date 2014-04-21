@@ -1,11 +1,14 @@
 package biblioj
 
+import java.sql.Timestamp
+
 class Reservation {
 
 	String	code
 	Date	reservation
 	Membre	membre
 	Boolean receptionnee
+	Timestamp version
 	
 	static mapping = {
 		membre lazy : false

@@ -17,10 +17,17 @@ class ReservationService {
 	def validerReservation(def varSession) {
 		/* suppression des livres non dispo du panier */
 		def listLivreNonDisponible = verrifierDiponnibilite(varSession)
+		def listLivre = []
 		listLivreNonDisponible.each { titreLivre ->
 			println "-> " + titreLivre
-			varSession["panier"].remove(Livre.findByTitre(titreLivre))
+			def livre = Livre.findByTitre(titreLivre)
+			println "--> " + livre.titre
+			println "--> " + livre
+			listLivre.add(livre)
+			println "--->" + listLivre
 		}
+		varSession.panier.removeAll(listLivre)
+		println "#" + varSession["panier"]
 		/* validation du panier */
 		def dateResa = new Date()
 		def membre = Membre.findByLogin(varSession["user"])

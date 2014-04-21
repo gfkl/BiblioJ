@@ -1,9 +1,12 @@
 package biblioj
 
+import java.sql.Timestamp
+
 class Auteur {
 	
 	String	nom
 	String	prenom
+	Timestamp version
 	
 	static hasMany = [auteurLivres : AuteurLivre]
 		

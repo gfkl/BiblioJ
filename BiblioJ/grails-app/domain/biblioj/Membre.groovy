@@ -1,10 +1,13 @@
 package biblioj
 
+import java.sql.Timestamp
+
 class Membre {
 
 	String	login
 	String	mdp
 	String	status
+	Timestamp version
 	
     static constraints = {
 		login blank : false, nullable : false, unique : true
