@@ -39,7 +39,6 @@ class ReservationLivreController {
 
 	def validerReservation(){
 		def list = reservationService.verrifierDiponnibilite(session)
-		println params
 		
 		if(list && (!(params.test.equals("second")))){
 			def strFlashMsg = "Les livres suivant ne sont pas disponible: "

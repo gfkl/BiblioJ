@@ -2,7 +2,10 @@ package biblioj
 
 
 
+import java.util.Date;
+
 import grails.test.mixin.*
+
 import org.junit.*
 
 /**
@@ -10,9 +13,10 @@ import org.junit.*
  */
 @TestFor(Reservation)
 class ReservationTests {
-
+	
 	void testSomething() {
-		Reservation r = new Reservation(code:"Code", reservation: new Date())
+		Membre m = new Membre(login:"bla", mdp:"mdp", status:"status")
+		Reservation r = new Reservation(code:"Code", reservation: new Date(), receptionnee:true, membre:m)
 
 		assertEquals(r.code, "Code")
 	}

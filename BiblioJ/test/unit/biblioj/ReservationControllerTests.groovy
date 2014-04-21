@@ -2,8 +2,12 @@ package biblioj
 
 
 
+import java.util.Date;
+
 import org.junit.*
+
 import grails.test.mixin.*
+import groovy.time.TimeCategory
 
 @TestFor(ReservationController)
 @Mock(Reservation)
@@ -12,7 +16,16 @@ class ReservationControllerTests {
     def populateValidParams(params) {
         assert params != null
         // TODO: Populate valid properties like...
-        //params["name"] = 'someValidName'
+		Membre m = new Membre(login:"bla", mdp:"mdp", status:"status")
+		Date temp = new Date()
+		use (TimeCategory) {
+			temp = temp + 12.hour
+		}
+	
+        params["code"] = 'unCode'
+		params["reservation"] = temp
+		params["membre"] = m
+		params["receptionnee"] = true
     }
 
     void testIndex() {
@@ -102,7 +115,7 @@ class ReservationControllerTests {
         // test invalid parameters in update
         params.id = reservation.id
         //TODO: add invalid values to params object
-
+		params.receptionnee = 5
         controller.update()
 
         assert view == "/reservation/edit"

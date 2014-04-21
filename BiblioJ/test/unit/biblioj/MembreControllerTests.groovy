@@ -3,6 +3,7 @@ package biblioj
 
 
 import org.junit.*
+
 import grails.test.mixin.*
 
 @TestFor(MembreController)
@@ -13,6 +14,12 @@ class MembreControllerTests {
         assert params != null
         // TODO: Populate valid properties like...
         //params["name"] = 'someValidName'
+		params["login"] = "log"
+		params["mdp"] = "passe"
+		params["status"] = "client"
+		
+		params
+
     }
 
     void testIndex() {
@@ -102,7 +109,8 @@ class MembreControllerTests {
         // test invalid parameters in update
         params.id = membre.id
         //TODO: add invalid values to params object
-
+		params.status = new Date()
+		
         controller.update()
 
         assert view == "/membre/edit"

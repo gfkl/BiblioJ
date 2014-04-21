@@ -3,6 +3,7 @@ package biblioj
 
 
 import grails.test.mixin.*
+
 import org.junit.*
 
 /**
@@ -12,8 +13,11 @@ import org.junit.*
 class ReservationLivreTests {
 
 	void testSomething() {
+		TypeDocument	typeDocument
+		TypeDocument t = new TypeDocument(intitule:"bla")
+		
 		Reservation r = new Reservation(code:"Code",reservation: new Date())
-		Livre l = new Livre(titre:"Livre_1",nombreExemplaires:5,nombreExemplairesDisponibles:3)
+		Livre l = new Livre(titre:"Livre_1",nombreExemplaires:5,nombreExemplairesDisponibles:3, typeDocument:t)
 		ReservationLivre rl = new ReservationLivre(livre:l, reservation:r)
 		
 		assertEquals(l, rl.livre)

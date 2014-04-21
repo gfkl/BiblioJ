@@ -3,6 +3,7 @@ package biblioj
 
 
 import grails.test.mixin.*
+
 import org.junit.*
 
 /**
@@ -12,6 +13,10 @@ import org.junit.*
 class MembreTests {
 
     void testSomething() {
-       fail "Implement me"
+		Membre a = new Membre(login:"login", mdp: "mdp", status:"status")
+		
+		assertEquals(a.login, "login")
+		assertEquals(a.mdp, "mdp")
+		assertEquals(a.status, "status")
     }
 }
