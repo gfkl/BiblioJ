@@ -26,7 +26,8 @@ class ReservationService {
 			listLivre.add(livre)
 			println "--->" + listLivre
 		}
-		varSession.panier.removeAll(listLivre)
+		println "---->" + listLivre
+		varSession["panier"].remove(listLivre)
 		println "#" + varSession["panier"]
 		/* validation du panier */
 		def dateResa = new Date()
