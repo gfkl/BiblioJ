@@ -125,12 +125,10 @@ class AuteurLivreControllerTests {
 
         populateValidParams(params)
         params.id = auteurLivre.id
-        params.version = -1
         controller.update()
 
         assert view == "/auteurLivre/edit"
         assert model.auteurLivreInstance != null
-        assert model.auteurLivreInstance.errors.getFieldError('version')
         assert flash.message != null
     }
 

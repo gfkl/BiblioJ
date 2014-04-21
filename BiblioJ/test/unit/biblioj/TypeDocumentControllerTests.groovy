@@ -123,12 +123,10 @@ class TypeDocumentControllerTests {
 
         populateValidParams(params)
         params.id = typeDocument.id
-        params.version = -1
         controller.update()
 
         assert view == "/typeDocument/edit"
         assert model.typeDocumentInstance != null
-        assert model.typeDocumentInstance.errors.getFieldError('version')
         assert flash.message != null
     }
 

@@ -12,7 +12,7 @@ import org.junit.*
 class GestionPanierServiceTests {
 
 	void testEmprunter() {
-		def livre = new Livre(titre:"Livre_1",nombreExemplaires:5,nombreExemplairesDisponibles:3)
+		def livre = new Livre(titre:"Livre_1",nombreExemplaires:5,nombreExemplairesDisponibles:3).save()
 		def params
 		def session
 		params.id = livre.id

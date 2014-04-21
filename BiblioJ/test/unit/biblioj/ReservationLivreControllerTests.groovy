@@ -125,12 +125,10 @@ class ReservationLivreControllerTests {
 
         populateValidParams(params)
         params.id = reservationLivre.id
-        params.version = -1
         controller.update()
 
         assert view == "/reservationLivre/edit"
         assert model.reservationLivreInstance != null
-        assert model.reservationLivreInstance.errors.getFieldError('version')
         assert flash.message != null
     }
 

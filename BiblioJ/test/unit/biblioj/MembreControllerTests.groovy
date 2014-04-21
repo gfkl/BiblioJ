@@ -130,12 +130,10 @@ class MembreControllerTests {
 
         populateValidParams(params)
         params.id = membre.id
-        params.version = -1
         controller.update()
 
         assert view == "/membre/edit"
         assert model.membreInstance != null
-        assert model.membreInstance.errors.getFieldError('version')
         assert flash.message != null
     }
 
