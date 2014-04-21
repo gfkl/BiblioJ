@@ -29,6 +29,8 @@ class LivreController {
 		redirect(controller:"reservation", action:"list")
 	}
 
+	
+	//Fonction qui permet de conserver l'offset et params d'une page a l'autre
 	def recherche(){
 	}
 

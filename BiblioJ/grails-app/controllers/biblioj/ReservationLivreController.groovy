@@ -33,6 +33,7 @@ class ReservationLivreController {
 		redirect(action: "show", id: reservationLivreInstance.id)
 	}
 
+	//Fonction qui permet de conserver l'offset et params d'une page a l'autre
 	def validerPanier(){
 	}
 

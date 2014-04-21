@@ -19,8 +19,8 @@ class MembreController {
 		redirect(controller:"Membre" ,action: "inscription")
 	}
 
+	//Fonction qui permet la redirection a la page d'inscription
 	def inscription(){
-
 	}
 
 	def inscriptionForm(){
