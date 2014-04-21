@@ -4,9 +4,13 @@ class BootStrap {
 	LoadDataService loadDataService
     def init = { servletContext ->
 		
+		/* Chargement des livres du fichier excel 1000 titres .... */
 		loadDataService.openExelData();
 		
-		(new Membre(login:"a",mdp:"a",status:"client")).save()
+		
+		/* Chargement de données supplémentaires pour les tests JUnit */
+		(new Membre(login:"a",mdp:"a",status:"admin")).save()
+		(new Membre(login:"q",mdp:"q",status:"client")).save()
 		
 		(new TypeDocument(intitule:"Aventure")).save()
 		(new TypeDocument(intitule:"Policier")).save()
