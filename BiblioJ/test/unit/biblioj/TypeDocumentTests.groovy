@@ -15,5 +15,6 @@ class TypeDocumentTests {
        TypeDocument t = new TypeDocument(intitule:"bla")
 	   
 	   assertEquals(t.intitule, "bla")
+	   assertEquals(t.toString(), "bla")
     }
 }
