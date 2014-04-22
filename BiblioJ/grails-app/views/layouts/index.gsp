@@ -218,5 +218,6 @@
 
 
 	<!--  -->
+	<g:currentDate></g:currentDate>
 </body>
 </html>

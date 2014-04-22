@@ -34,11 +34,15 @@ class LoadDataService extends Exception{
 				if(auteur != null){
 					def emplacement = auteur.indexOf(',')
 					if(emplacement == -1){
-						(new Auteur(nom:auteur)).save()
+						if (!Auteur.findByNom(auteur))
+							(new Auteur(nom:auteur)).save()
 						(new AuteurLivre(auteur:Auteur.findByNom(auteur),livre:Livre.findByTitreAndTypeDocument(titre, typeDoc))).save()
 					}
 					else{
-						(new Auteur(nom:auteur.substring(0, emplacement), prenom:auteur.substring(emplacement+1,auteur.length()))).save()
+						def nom = auteur.substring(0, emplacement)
+						def prenom = auteur.substring(emplacement+1,auteur.length())
+						if (!Auteur.findByNomAndPrenom(nom, prenom))
+							(new Auteur(nom: nom, prenom:prenom)).save()
 						(new AuteurLivre(auteur:Auteur.findByNom(auteur.substring(0, emplacement)),livre:Livre.findByTitreAndTypeDocument(titre, typeDoc))).save()
 					}
 				}

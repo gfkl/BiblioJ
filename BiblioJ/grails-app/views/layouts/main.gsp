@@ -100,5 +100,7 @@
 	</div>
 	<g:javascript library="application" />
 	<r:layoutResources />
+	
+	<g:currentDate></g:currentDate>
 </body>
 </html>

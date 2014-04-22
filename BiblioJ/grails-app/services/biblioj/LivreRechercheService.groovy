@@ -42,7 +42,6 @@ class LivreRechercheService extends Exception{
 			findType = true
 			findAuteur = false
 		}
-
 		map
 	}
 
