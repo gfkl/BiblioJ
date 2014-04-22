@@ -51,7 +51,7 @@
 			<h1>
 				<a class="home" href="${createLink(uri: '/')}"><img
 					src="${resource(dir: 'images', file: 'logo.png')}" alt="Grails"
-					width="150" height="150" /></a>
+					width="300" height="150" /></a>
 			</h1>
 		</div>
 	</div>
