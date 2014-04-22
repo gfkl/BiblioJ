@@ -6,7 +6,6 @@ class AuteurLivre {
 
 	Auteur	auteur
 	Livre	livre
-	Timestamp version
 	
 	static mapping = {
 		auteur fetch : 'join'

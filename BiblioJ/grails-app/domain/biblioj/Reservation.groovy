@@ -8,7 +8,6 @@ class Reservation {
 	Date	reservation
 	Membre	membre
 	Boolean receptionnee
-	Timestamp version
 	
 	static mapping = {
 		membre lazy : false
