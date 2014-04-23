@@ -12,6 +12,9 @@ class Livre {
 	static hasMany = [auteurLivres : AuteurLivre,
 		reservationLivres : ReservationLivre]
 
+	static mapping = {
+		typeDocument lazy : false
+	}
 
 	static constraints = {
 		titre nullable : false, blank : false
