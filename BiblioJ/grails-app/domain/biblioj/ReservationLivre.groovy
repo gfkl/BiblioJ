@@ -6,6 +6,7 @@ class ReservationLivre {
 
 	Reservation	reservation
 	Livre		livre
+	Timestamp 	version
 	
 	static mapping = {
 		reservation fetch : 'join'

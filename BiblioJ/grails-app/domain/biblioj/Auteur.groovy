@@ -6,6 +6,7 @@ class Auteur {
 	
 	String	nom
 	String	prenom
+	Timestamp version
 	
 	static hasMany = [auteurLivres : AuteurLivre]
 		
